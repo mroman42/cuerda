@@ -3,18 +3,22 @@
 module Chorda where
 
 import Cell
+import Identify
+import Connect
+import Style
+import Draw
 
-dI :: Int -> Double
-dI = fromIntegral
+-- dI :: Int -> Double
+-- dI = fromIntegral
 
 -- Demoting a diagram
-demote2to1 :: Cell2 -> Cell1
-demote2to1 c = Cell1
-  { name1 = name2 c
-  , id1 = id2 c
-  , xpos1 = xpos2 c
-  , ypos1 = ypos2 c
-  }
+-- demote2to1 :: Cell2 -> Cell1
+-- demote2to1 c = Cell1
+--   { name1 = name2 c
+--   , id1 = id2 c
+--   , xpos1 = xpos2 c
+--   , ypos1 = ypos2 c
+--   }
 
 -- Positioning a list of things, relative to a height.
 positionX :: (Positioned a) => Double -> [a] -> [a]
@@ -64,37 +68,11 @@ positionRack2 s r = positionNodes $ positionTargets 0.0 (positionSources 0.0 r)
         totalLenT :: Int
         totalLenT = length (concatMap target2 r)
 
-
-class Draw a where
-  draw :: a -> String
-
-instance Draw Cell1 where
-  draw c =
-    "\\node [hint] at ("
-    ++ show (getY c)
-    ++ ", "
-    ++ show (getX c)
-    ++ ") {};"
-
-instance (Draw a) => Draw [a] where
-  draw = unlines . map draw
-
-instance Draw Cell2 where
-  draw c = unlines [ drawCore c , draw (source2 c) , draw (target2 c) ]
-   where
-    drawCore :: Cell2 -> String
-    drawCore c =
-      "\\node [morphism] at ("
-      ++ show (getY c)
-      ++ ", "
-      ++ show (getX c)
-      ++ ") {$"
-      ++ name2 c
-      ++ "$};"
+positionDiagram2 :: Double -> Diagram2 -> Diagram2
+positionDiagram2 d c = zipWith shiftY (map dI [0..]) $ map (positionRack2 d) c
 
 drawDiagram2 :: Double -> Diagram2 -> String
-drawDiagram2 d c =
-  unlines $ map draw $ zipWith shiftY (map dI [0..]) (map (positionRack2 d) c)
+drawDiagram2 d = unlines . map draw . positionDiagram2 d
 
 
 ----
@@ -106,18 +84,35 @@ example = [f,g,h]
     a = cell1 "a"
     b = cell1 "b"
     f = cell2 "f" [a,b] [b]
+    d = cell2 "d" [a,b] []
     g = cell2 "g" [a] [b]
     h = cell2 "h" [a] [a,b,b]
 
 example3 :: [[Cell2]]
-example3 = [[h],[f,g],[f]]
+example3 = [[h],[f,idt a],[d]]
   where
     a = cell1 "a"
     b = cell1 "b"
     f = cell2 "f" [a,b] [b]
+    d = cell2 "d" [a,b] []
     g = cell2 "g" [a] [b]
     h = cell2 "h" [a] [a,b,b]
 
+example4 :: [[Cell2]]
+example4 = [[ol],[t,idt a],[or]]
+  where
+    a = cell1 "a"
+    ol = cell2 "\\otimes" [a] [a,a]
+    t = cell2 "T" [a] [a]
+    or = cell2 "\\otimes" [a,a] [a]
+
+example5 :: [[Cell2]]
+example5 = [[ol],[ol,idt a]]
+  where
+    a = cell1 "a"
+    ol = cell2 "\\otimes" [a] [a,a]
+    t = cell2 "T" [a] [a]
+    or = cell2 "\\otimes" [a,a] [a]
 
 example2 :: [Cell1]
 example2 = [a,a,a]
@@ -127,6 +122,9 @@ example2 = [a,a,a]
 main :: IO ()
 main = do
   readFile "latexHeader.tex" >>= putStrLn
-  putStrLn $ drawDiagram2 3.0 example3
+  let ex = identify "u" example5
+  putStrLn $ drawDiagram2 1.5 ex
+  putStrLn $ connections      ex
+  putStrLn $ drawDiagram2 1.5 ex
   -- putStrLn $ draw (positionRack2 6.0 example)
   readFile "latexFooter.tex" >>= putStrLn

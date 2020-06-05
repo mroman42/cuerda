@@ -1,0 +1,28 @@
+\documentclass[tikz, border=2mm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,shapes}
+
+\tikzset{ morphism/.style=
+    { circle
+    , minimum height = #1
+    , minimum width = .5cm
+    , fill=white
+    , inner sep=1pt
+    , draw }
+  , morphism/.default=.5cm }
+
+\tikzset{ hint/.style=
+    { circle
+    , draw=black!20
+    , dashed }
+  , hint/.default=.5cm }
+
+\tikzset{ tilted/.style=
+  { x={(1,0)}
+  , y={(0.6,0.6)}
+  }
+}
+
+\begin{document}
+\begin{tikzpicture}[scale=0.8]

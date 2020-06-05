@@ -3,8 +3,11 @@
 
 module Cell where
 
-type Label = String
+import Style
+
 type Id = String
+type Label = String
+
 
 -- Cells
 data Cell1 = Cell1
@@ -27,10 +30,20 @@ data Cell2 = Cell2
   , id2 :: Id
   , xpos2 :: Double
   , ypos2 :: Double
+  , style :: Style
   }
 
 cell2 :: Label -> [Cell1] -> [Cell1] -> Cell2
-cell2 l s t = Cell2 l s t "none" 0.0 0.0
+cell2 l s t = Cell2 l s t "none" 0.0 0.0 Morphism
+
+morph :: Label -> [Cell1] -> [Cell1] -> Cell2
+morph l s t = Cell2 l s t "none" 0.0 0.0 Morphism
+
+idt :: Cell1 -> Cell2
+idt a = Cell2 "[idt]" [a] [a] "none" 0.0 0.0 Identity
+
+space :: Cell2
+space = Cell2 "[space]" [] [] "none" 0.0 0.0 Space
 
 type Diagram2 = [[Cell2]]
 
@@ -41,14 +54,13 @@ data Cell3 = Cell3
   , id3 :: Id
   , xpos3 :: Double
   , ypos3 :: Double
+  , style3 :: Style
   }
 
 type Diagram3 = [[[Cell3]]]
 
 cell3 :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
-cell3 l s t = Cell3 l s t "none" 0.0 0.0
-
-
+cell3 l s t = Cell3 l s t "none" 0.0 0.0 Transformation
 
 class Shiftable a where
   shiftX :: Double -> a -> a
@@ -89,7 +101,6 @@ instance Shiftable Cell2 where
       { source2 = shiftY y (source2 c)
       , target2 = shiftY y (target2 c)
       }
-
 
 instance Positioned Cell1 where
   getX = xpos1

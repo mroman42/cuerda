@@ -7,7 +7,7 @@
 test.pdf: test.tex
 	pdflatex $<
 
-test.tex: *.hs *.tex
+test.tex: *.hs latexHeader.tex latexFooter.tex
 	runhaskell Chorda.hs > $@
 
 clean:
