@@ -20,6 +20,8 @@ data Cell1 = Cell1
 cell1 :: Label -> Cell1
 cell1 l = Cell1 l "none" 0.0 0.0
 
+obj :: Label -> Cell1
+obj l = Cell1 l "none" 0.0 0.0
 
 type Diagram1 = [Cell1]
 
@@ -47,6 +49,12 @@ space = Cell2 "[space]" [] [] "none" 0.0 0.0 Space
 
 type Diagram2 = [[Cell2]]
 
+
+-- Sequential and parallel composition of diagrams.
+seq2 :: Diagram2 -> Diagram2 -> Diagram2
+seq2 = (<>)
+
+
 data Cell3 = Cell3
   { name3 :: Label
   , source3 :: Diagram2
@@ -61,6 +69,12 @@ type Diagram3 = [[[Cell3]]]
 
 cell3 :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
 cell3 l s t = Cell3 l s t "none" 0.0 0.0 Transformation
+
+transf :: Label -> Cell2
+transf l = Cell2 l [] [] "none" 0.0 0.0 Transformation
+
+-- transf :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
+-- transf l s t = Cell3 l s t "none" 0.0 0.0 Transformation
 
 class Shiftable a where
   shiftX :: Double -> a -> a

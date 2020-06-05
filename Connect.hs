@@ -13,6 +13,7 @@ connection :: Cell2 -> String
 connection c = connectWith (style c) c
   where
     connectWith Morphism = connectMorph
+    connectWith Transformation = connectMorph
     connectWith Identity = connectIdentity
     connectWith Space = connectSpace
 

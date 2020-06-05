@@ -38,6 +38,7 @@ instance Draw Cell2 where
     drawCore c = drawWith (style c) c
        where
          drawWith Morphism = drawMorph
+         drawWith Transformation = drawTransf
          drawWith Identity = drawIdentity
          drawWith Space = drawSpace
 
@@ -54,6 +55,18 @@ instance Draw Cell2 where
       ++ ") {$"
       ++ name2 c
       ++ "$};"
+
+    drawTransf :: Cell2 -> String
+    drawTransf c = "\\node ("
+      ++ id2 c
+      ++ ") [transformation] at ("
+      ++ show (getY c)
+      ++ ", "
+      ++ show (getX c)
+      ++ ") {$"
+      ++ name2 c
+      ++ "$};"
+
 
     drawIdentity :: Cell2 -> String
     drawIdentity c =

@@ -8,18 +8,6 @@ import Connect
 import Style
 import Draw
 
--- dI :: Int -> Double
--- dI = fromIntegral
-
--- Demoting a diagram
--- demote2to1 :: Cell2 -> Cell1
--- demote2to1 c = Cell1
---   { name1 = name2 c
---   , id1 = id2 c
---   , xpos1 = xpos2 c
---   , ypos1 = ypos2 c
---   }
-
 -- Positioning a list of things, relative to a height.
 positionX :: (Positioned a) => Double -> [a] -> [a]
 positionX d l = zipWith pos [0..] l
@@ -71,9 +59,64 @@ positionRack2 s r = positionNodes $ positionTargets 0.0 (positionSources 0.0 r)
 positionDiagram2 :: Double -> Diagram2 -> Diagram2
 positionDiagram2 d c = zipWith shiftY (map dI [0..]) $ map (positionRack2 d) c
 
+-- 3D positioning is easier because we are going to actually use scopes anyway.
+-- We should just map the positioning to every layer and then position the core nodes.
 drawDiagram2 :: Double -> Diagram2 -> String
-drawDiagram2 d = unlines . map draw . positionDiagram2 d
+drawDiagram2 d c =
+  -- Draw the nodes
+  unlines (map draw (positionDiagram2 d c))
+  -- Draw the connections
+  ++ connections c
+  -- And draw again the nodes over them
+  ++ unlines (map draw (positionDiagram2 d c))
 
+drawSomeDiagrams :: Double -> [Diagram2] -> String
+drawSomeDiagrams d l = unlines
+  $ zipWith scope [0..]
+  $ map (drawDiagram2 d . shiftBySize) l
+  where
+    scope :: Int -> String -> String
+    scope n s =
+      "\\begin{scope}[tilted,yshift="
+      ++ show (dI n * 0.8)
+      ++ "cm]\n"
+      ++ s
+      ++ "\n"
+      ++ "\\end{scope}"
+
+    shiftBySize :: Diagram2 -> Diagram2
+    shiftBySize c = shiftY (-dI (length c) / 2.0) c
+
+
+-- Drawing 3d diagrams could be a pain. Instead, draw the 2d diagrams and link
+-- them.
+-- drawDiagram3 :: Double -> Diagram3 -> String
+-- drawDiagram3 d [[[c]]] = drawDiagram2 d (source3 c)
+  -- let's start by only drawing the source
+
+type Connections = [((Int,Int,Int),(Int,Int,Int))]
+
+extraConnections :: [Diagram2] -> [((Int,Int,Int),(Int,Int,Int))] -> String
+extraConnections c = unlines . map (connect c)
+  where
+    connect :: [Diagram2] -> ((Int,Int,Int),(Int,Int,Int)) -> String
+    connect c ((x1,x2,x3),(y1,y2,y3)) = connectIds firstId secondId
+      where
+        firstId = id2 (c !! x1 !! x2 !! x3) :: String
+        secondId = id2 (c !! y1 !! y2 !! y3) :: String
+
+connectIds :: Id -> Id -> String
+connectIds firstId secondId =
+      "\\draw [red!30] ("
+      ++ firstId
+      ++ ".center) to [out=-90,in=90] ("
+      ++ secondId
+      ++ ".center);"
+
+-- \begin{scope}[every path/.style={-,out=0,in=180}]
+--  \draw (prodOne-o2) to (prodTwo-i2);
+--  \draw (prodOne-o1) to (prodTwo-i1);
+-- \end{scope}
 
 ----
 -- Examples
@@ -119,12 +162,46 @@ example2 = [a,a,a]
   where
     a = cell1 "a"
 
+example6 :: [Diagram2]
+example6 =
+  [ [[o],[o,idt c]]
+  , [[a]]
+  , [[o],[idt c, f,idt c]]
+  ]
+  where
+    c = obj "\\mathbb{C}"
+    f = morph "f" [] [c]
+    o = morph "\\otimes" [c] [c,c]
+    a = transf "\\mathrm{id}"
+
+exampleConn :: Connections
+exampleConn =
+  [ ( (1,0,0) , (0,0,0) )
+  , ( (1,0,0) , (0,1,0) )
+  , ( (2,0,0) , (1,0,0) )
+  , ( (2,1,1) , (1,0,0) )
+  ]
+
+fili :: [Diagram2] -> String
+fili c =
+  unlines (zipWith connectIds o i)
+  ++ "\n" ++
+  unlines (zipWith connectIds o2 i2)
+  where
+    i = map id1 $ (concatMap source2) (head $ head c)
+    o = map id1 $ (concatMap source2) (head $ last c)
+
+    i2 = map id1 $ (concatMap target2) (last $ head c)
+    o2 = map id1 $ (concatMap target2) (last $ last c)
+
+
 main :: IO ()
 main = do
   readFile "latexHeader.tex" >>= putStrLn
-  let ex = identify "u" example5
-  putStrLn $ drawDiagram2 1.5 ex
-  putStrLn $ connections      ex
-  putStrLn $ drawDiagram2 1.5 ex
+  let ex = identify "u" example6
+  putStrLn $ drawSomeDiagrams 2 ex
+  putStrLn $ extraConnections ex exampleConn
+  putStrLn $ drawSomeDiagrams 2 ex
+  putStrLn $ fili ex
   -- putStrLn $ draw (positionRack2 6.0 example)
   readFile "latexFooter.tex" >>= putStrLn

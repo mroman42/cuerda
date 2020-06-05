@@ -6,17 +6,28 @@
 \tikzset{ morphism/.style=
     { circle
     , minimum height = #1
-    , minimum width = .5cm
+    , minimum width = .4cm
     , fill=white
     , inner sep=1pt
     , draw }
-  , morphism/.default=.5cm }
+  , morphism/.default=.4cm }
+
+\tikzset{ transformation/.style=
+    { circle
+    , minimum height = #1
+    , minimum width = .4cm
+    , fill=white
+    , inner sep=1pt
+    , draw=red
+    , text=red
+  }
+ , transformation/.default=.4cm }
 
 \tikzset{ hint/.style=
     { circle
-    , draw=black!20
+    %, draw=black!20
     , dashed }
-  , hint/.default=.5cm }
+  , hint/.default=.2cm }
 
 \tikzset{ tilted/.style=
   { x={(1,0)}
@@ -25,4 +36,4 @@
 }
 
 \begin{document}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture} % [scale=0.8,tilted]
