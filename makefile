@@ -7,7 +7,7 @@
 test.pdf: test.tex
 	pdflatex $<
 
-test.tex: Chorda.hs
+test.tex: *.hs *.tex
 	runhaskell Chorda.hs > $@
 
 clean:
