@@ -239,8 +239,8 @@ fili c =
     o2 = map id1 $ (concatMap target2) (last $ last c)
 
 
-example7 :: [[Cell3]]
-example7 = identify "" [[alpha],[beta]]
+exampleAssoc :: [[Cell3]]
+exampleAssoc = identify "" [[alpha],[beta]]
   where
     c = obj "\\mathbb{C}"
     o = morph "\\otimes" [c] [c,c]
@@ -248,13 +248,32 @@ example7 = identify "" [[alpha],[beta]]
     alpha = cell3 "\\check\\alpha" [[o],[idt c,o]] [[o],[o,idt c]]
     beta = cell3 "\\hat\\alpha" [[oR,idt c],[oR]] [[idt c,oR],[oR]]
 
+exampleLunit :: [[Cell3]]
+exampleLunit = identify "" [[lambda2]]
+  where
+    c = obj "\\mathbb{C}"
+    o = morph "\\otimes" [c] [c,c]
+    i = morph "i" [c] []
+    lambda2 = cell3 "\\lambda" [[o],[idt c,i],[idt c]] [[idt c]]
+
+exampleTambara :: [[Cell3]]
+exampleTambara = identify "" [[y]]
+  where
+    c = obj "\\mathbb{C}"
+    oL = morph "\\otimes" [c] [c,c]
+    oR = morph "\\otimes" [c,c] [c]
+    t = morph "T" [c] [c]
+
+    y = cell3 "t" [[oR],[t],[oL]] [[idt c, idt c],[t,idt c],[idt c, idt c]]
+
 main :: IO ()
 main = do
   readFile "latexHeader.tex" >>= putStrLn
 
-  putStrLn $ drawRack3 2 2 example7
-  putStrLn $ connectionsRack3 example7
-  putStrLn $ drawRack3 2 2 example7
+  let ex = exampleTambara
+  putStrLn $ drawRack3 1.5 2 ex
+  putStrLn $ connectionsRack3 ex
+  putStrLn $ drawRack3 1.5 2 ex
 
   -- EXAMPLE 6
   -- let ex = identify "u" example6
