@@ -69,3 +69,32 @@ connectMorph c = unlines $ concat
 
 connections :: Diagram2 -> String
 connections = unlines . concat . map (map connection)
+
+-- Connects an identified 3 cell.
+connection3 :: Cell3 -> String
+connection3 c = unlines $
+    map kS (concat (source3 c))
+    ++ map kT (concat (target3 c))
+  where
+    kS :: Cell2 -> String
+    kS p = if (style p) == Morphism
+      then
+        ("\\draw [red!30] ("
+        ++ id2 p
+        ++ ".center) to [out=90,in=-90] ("
+        ++ id3 c
+        ++ ".center);")
+      else ""
+
+    kT :: Cell2 -> String
+    kT p = if (style p) == Morphism
+      then
+        ("\\draw [red!30] ("
+        ++ id2 p
+        ++ ".center) to [out=-90,in=90] ("
+        ++ id3 c
+        ++ ".center);")
+      else ""
+
+connectionsRack3 :: [[Cell3]] -> String
+connectionsRack3 = unlines . concat . (map (map connection3))

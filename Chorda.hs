@@ -88,11 +88,55 @@ drawSomeDiagrams d l = unlines
     shiftBySize c = shiftY (-dI (length c) / 2.0) c
 
 
--- Drawing 3d diagrams could be a pain. Instead, draw the 2d diagrams and link
--- them.
+-- Drawing 3d diagrams.
 -- drawDiagram3 :: Double -> Diagram3 -> String
 -- drawDiagram3 d [[[c]]] = drawDiagram2 d (source3 c)
-  -- let's start by only drawing the source
+
+-- Drawing 3d diagrams.
+drawRack3 :: Double -> Double -> [[Cell3]] -> String
+drawRack3 d h c =
+       scope 0 (drawDiagram2 d (shiftBySize theSource))
+    ++ scope 0.5 (drawDiagram2 d (shiftBySize theMiddle))
+    ++ scope 1 (drawDiagram2 d (shiftBySize theTarget))
+    ++ fili [theSource, theTarget]
+  where
+    -- Construct the source by aggregating sources.
+    theSource :: Diagram2
+    theSource = foldr1 seq2 $ map (foldr1 par2) $ map (map source3) c
+    
+    -- Construct the target by aggregating targets.
+    theTarget :: Diagram2
+    theTarget = foldr1 seq2 $ map (foldr1 par2) $ map (map target3) c
+
+    -- Form the middle diagram.
+    demote :: Cell3 -> Cell2
+    demote c = Cell2
+      { name2 = name3 c
+      , source2 = []
+      , target2 = []
+      , id2 = id3 c
+      , xpos2 = 0.0
+      , ypos2 = 0.0
+      , style = style3 c
+      }
+
+    theMiddle :: Diagram2
+    theMiddle = map (map demote) c
+
+    -- Shift by size
+    shiftBySize :: Diagram2 -> Diagram2
+    shiftBySize c = shiftY (-dI (length c) / 2.0) c
+
+    -- Scope a diagram
+    scope :: Double -> String -> String
+    scope n s =
+      "\\begin{scope}[tilted,yshift="
+      ++ show (n * h)
+      ++ "cm]\n"
+      ++ s
+      ++ "\n"
+      ++ "\\end{scope}"
+    
 
 type Connections = [((Int,Int,Int),(Int,Int,Int))]
 
@@ -195,13 +239,29 @@ fili c =
     o2 = map id1 $ (concatMap target2) (last $ last c)
 
 
+example7 :: [[Cell3]]
+example7 = identify "" [[alpha],[beta]]
+  where
+    c = obj "\\mathbb{C}"
+    o = morph "\\otimes" [c] [c,c]
+    oR = morph "\\otimes" [c,c] [c]
+    alpha = cell3 "\\check\\alpha" [[o],[idt c,o]] [[o],[o,idt c]]
+    beta = cell3 "\\hat\\alpha" [[oR,idt c],[oR]] [[idt c,oR],[oR]]
+
 main :: IO ()
 main = do
   readFile "latexHeader.tex" >>= putStrLn
-  let ex = identify "u" example6
-  putStrLn $ drawSomeDiagrams 2 ex
-  putStrLn $ extraConnections ex exampleConn
-  putStrLn $ drawSomeDiagrams 2 ex
-  putStrLn $ fili ex
-  -- putStrLn $ draw (positionRack2 6.0 example)
+
+  putStrLn $ drawRack3 2 2 example7
+  putStrLn $ connectionsRack3 example7
+  putStrLn $ drawRack3 2 2 example7
+
+  -- EXAMPLE 6
+  -- let ex = identify "u" example6
+  -- putStrLn $ drawSomeDiagrams 2 ex
+  -- putStrLn $ extraConnections ex exampleConn
+  -- putStrLn $ drawSomeDiagrams 2 ex
+  -- putStrLn $ fili ex
+
+
   readFile "latexFooter.tex" >>= putStrLn

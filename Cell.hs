@@ -50,10 +50,13 @@ space = Cell2 "[space]" [] [] "none" 0.0 0.0 Space
 type Diagram2 = [[Cell2]]
 
 
--- Sequential and parallel composition of diagrams.
+-- Sequential and parallel join of diagrams. Note that parallel assumes that the
+-- two diagrams are of the same width, that is, it is not real parallel
+-- composition but only "stacking" diagrams.
 seq2 :: Diagram2 -> Diagram2 -> Diagram2
 seq2 = (<>)
-
+par2 :: Diagram2 -> Diagram2 -> Diagram2
+par2 = zipWith (<>)
 
 data Cell3 = Cell3
   { name3 :: Label
