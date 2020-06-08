@@ -1,2 +1,0 @@
-# chordahs
-Chorda in Haskell

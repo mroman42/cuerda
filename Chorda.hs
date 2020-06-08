@@ -185,18 +185,11 @@ example3 = [[h],[f,idt a],[d]]
     g = cell2 "g" [a] [b]
     h = cell2 "h" [a] [a,b,b]
 
-example4 :: [[Cell2]]
-example4 = [[ol],[t,idt a],[or]]
-  where
-    a = cell1 "a"
-    ol = cell2 "\\otimes" [a] [a,a]
-    t = cell2 "T" [a] [a]
-    or = cell2 "\\otimes" [a,a] [a]
 
 example5 :: [[Cell2]]
 example5 = [[ol],[ol,idt a]]
   where
-    a = cell1 "a"
+    a = cell1 "\\mathbf{a}"
     ol = cell2 "\\otimes" [a] [a,a]
     t = cell2 "T" [a] [a]
     or = cell2 "\\otimes" [a,a] [a]
@@ -217,6 +210,15 @@ example6 =
     f = morph "f" [] [c]
     o = morph "\\otimes" [c] [c,c]
     a = transf "\\mathrm{id}"
+
+example4 :: [[Cell2]]
+example4 = [[ol],[t,idt a],[or]]
+  where
+    a = cell1 "a"
+    ol = cell2 "\\otimes" [a] [a,a]
+    t = cell2 "T" [a] [a]
+    or = cell2 "\\otimes" [a,a] [a]
+
 
 exampleConn :: Connections
 exampleConn =
@@ -240,13 +242,15 @@ fili c =
 
 
 exampleAssoc :: [[Cell3]]
-exampleAssoc = identify "" [[alpha],[beta]]
+exampleAssoc = identify "" [[alpha]]
   where
     c = obj "\\mathbb{C}"
     o = morph "\\otimes" [c] [c,c]
-    oR = morph "\\otimes" [c,c] [c]
     alpha = cell3 "\\check\\alpha" [[o],[idt c,o]] [[o],[o,idt c]]
+
+    oR = morph "\\otimes" [c,c] [c]
     beta = cell3 "\\hat\\alpha" [[oR,idt c],[oR]] [[idt c,oR],[oR]]
+
 
 exampleLunit :: [[Cell3]]
 exampleLunit = identify "" [[lambda2]]
@@ -270,10 +274,11 @@ main :: IO ()
 main = do
   readFile "latexHeader.tex" >>= putStrLn
 
-  let ex = exampleTambara
-  putStrLn $ drawRack3 1.5 2 ex
-  putStrLn $ connectionsRack3 ex
-  putStrLn $ drawRack3 1.5 2 ex
+  -- EXAMPLE ASSOC
+  -- let ex = exampleAssoc
+  -- putStrLn $ drawRack3 1.5 2 ex
+  -- putStrLn $ connectionsRack3 ex
+  -- putStrLn $ drawRack3 1.5 2 ex
 
   -- EXAMPLE 6
   -- let ex = identify "u" example6
@@ -282,5 +287,8 @@ main = do
   -- putStrLn $ drawSomeDiagrams 2 ex
   -- putStrLn $ fili ex
 
+  -- EXAMPLE 4
+  let ex = identify "u" example4
+  putStrLn $ drawDiagram2 2 ex
 
   readFile "latexFooter.tex" >>= putStrLn
