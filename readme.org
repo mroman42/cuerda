@@ -1,3 +1,3 @@
 #+TITLE: Chorda
 
-*Chorda* is a library for producing string and surface diagrams on Tikz. It is very loosely inspired on the theory of /associative n-categories/ for its internal representation (see [[Reutter, Vicary]](https://arxiv.org/abs/1902.03831), []) in that unitality is not strict.
+*Chorda* is a library for producing string and surface diagrams on Tikz. It is very loosely inspired on the theory of /associative n-categories/ for its internal representation (see [[https://arxiv.org/abs/1812.10586][Dorn (2018)]] and [[https://arxiv.org/abs/1902.03831][Reutter and Vicary (2019)]]) in that unitality is not strict.  For the end user, this means you will have to introduce some identity morphisms by hand, but the internal representation is greatly simplified because of this.
