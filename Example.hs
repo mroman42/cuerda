@@ -14,9 +14,11 @@ c = obj "\\mathbb{C}"
 o = morph "\\otimes" [c,c] [c]
 i = morph "I" [] [c]
 alpha = transf "\\alpha" [[idt c,o],[o]] [[o,idt c],[o]]
+alphainv = transf "\\alpha" [[o,idt c],[o]] [[idt c,o],[o]]
 lambda = transf "\\lambda" [[i,idt c],[o]] [[idt c],[idt c]]
+lambdainv = transf "\\lambda" [[idt c],[idt c]] [[i,idt c],[o]]
 rho = transf "\\rho" [[idt c,i],[o]] [[idt c],[idt c]]
-
+rhoinv = transf "\\rho" [[idt c],[idt c]] [[idt c,i],[o]]
 
 
 main :: IO ()
@@ -27,36 +29,7 @@ main = do
   putStrLn "\\ProvidesPackage{mydiagrams}[2020/05/09 v0.1 My Diagrams.]"
 
   putStrLn $ unlines $ map show
-    [ mkDiagram3D "associatorDiagram" [[alpha]]
-    , mkDiagram3D "leftUnitorDiagram" [[lambda]]
-    , mkDiagram3D "rightUnitorDiagram" [[rho]]
+    [ mkDiagram3D "associatorDiagram" [[[alphainv]],[[alpha]]]
+    , mkDiagram3D "leftUnitorDiagram" [[[lambdainv]],[[lambda]]]
+    , mkDiagram3D "rightUnitorDiagram" [[[rhoinv]],[[rho]]]
     ]
-
-  -- readFile "latexHeader.tex" >>= putStrLn
-
-  -- EXAMPLE ASSOC
-
-
-
-
-  -- putStrLn "\\newcommand{\\assocDiagram}{"
-  -- putStrLn "\\begin{tikzpicture}" 
-  -- let ex = exampleAssoc
-  -- putStrLn $ drawRack3 1.5 2 ex
-  -- putStrLn $ connectionsRack3 ex
-  -- putStrLn $ drawRack3 1.5 2 ex
-  -- putStrLn "\\end{tikzpicture}"
-
-
-  -- EXAMPLE 6
-  -- let ex = identify "u" example6
-  -- putStrLn $ drawSomeDiagrams 2 ex
-  -- putStrLn $ extraConnections ex exampleConn
-  -- putStrLn $ drawSomeDiagrams 2 ex
-  -- putStrLn $ fili ex
-
-  -- EXAMPLE 4
-  -- let ex = identify "u" example4
-  -- putStrLn $ drawDiagram2 2 ex
-
-  --  readFile "latexFooter.tex" >>= putStrLn

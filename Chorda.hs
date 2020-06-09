@@ -108,6 +108,7 @@ drawRack3 d h c =
     ++ scope 0.5 (drawDiagram2 d (shiftBySize theMiddle))
     ++ scope 1 (drawDiagram2 d (shiftBySize theTarget))
     ++ fili [theSource, theTarget]
+    ++ scope 0 (drawDiagram2 d (shiftBySize theSource))
   where
     -- Construct the source by aggregating sources.
     theSource :: Diagram2
@@ -145,33 +146,39 @@ drawRack3 d h c =
       ++ s
       ++ "\n"
       ++ "\\end{scope}"
-    
 
-type Connections = [((Int,Int,Int),(Int,Int,Int))]
-
-
-fili :: [Diagram2] -> String
-fili c =
-  unlines (zipWith connectIds o i)
-  ++ "\n" ++
-  unlines (zipWith connectIds o2 i2)
-  where
-    i = map id1 $ (concatMap source2) (head $ head c)
-    o = map id1 $ (concatMap source2) (head $ last c)
-
-    i2 = map id1 $ (concatMap target2) (last $ head c)
-    o2 = map id1 $ (concatMap target2) (last $ last c)
-
-
-
-extraConnections :: [Diagram2] -> [((Int,Int,Int),(Int,Int,Int))] -> String
-extraConnections c = unlines . map (connect c)
-  where
-    connect :: [Diagram2] -> ((Int,Int,Int),(Int,Int,Int)) -> String
-    connect c ((x1,x2,x3),(y1,y2,y3)) = connectIds firstId secondId
+    -- Final touches
+    fili :: [Diagram2] -> String
+    fili c =
+      unlines (zipWith connectIds o i)
+      ++ "\n" ++
+      unlines (zipWith connectIds o2 i2)
       where
-        firstId = id2 (c !! x1 !! x2 !! x3) :: String
-        secondId = id2 (c !! y1 !! y2 !! y3) :: String
+        i = map id1 $ (concatMap source2) (head $ head c)
+        o = map id1 $ (concatMap source2) (head $ last c)
+
+        i2 = map id1 $ (concatMap target2) (last $ head c)
+        o2 = map id1 $ (concatMap target2) (last $ last c)
+
+drawDiagramIn3d :: Double -> Double -> [[[Cell3]]] -> String
+drawDiagramIn3d d h c = unlines $ zipWith drawInScope [0..] c
+  where
+    drawInScope :: Int -> [[Cell3]] -> String
+    drawInScope n c = scope n $ unlines
+      [ drawRack3 d h c
+      , connectionsRack3 c
+      , drawRack3 d h c
+      ]
+
+    -- Scope a diagram
+    scope :: Int -> String -> String
+    scope n s =
+      "\\begin{scope}[yshift="
+      ++ show (dI n * 1 * h)
+      ++ "cm]\n"
+      ++ s
+      ++ "\n"
+      ++ "\\end{scope}"
 
 connectIds :: Id -> Id -> String
 connectIds firstId secondId =
@@ -184,24 +191,15 @@ connectIds firstId secondId =
 
 data Diagram3d = Diagram3d
   { commandName :: String
-  , cells :: [[Cell3]]
+  , cells :: [[[Cell3]]]
   }
 
-mkDiagram3D :: String -> [[Cell3]] -> Diagram3d
+mkDiagram3D :: String -> [[[Cell3]]] -> Diagram3d
 mkDiagram3D s c = Diagram3d s (identify "i" c)
 
 instance Show Diagram3d where
   show c = unlines
     [ "\\newcommand{\\" ++ commandName c ++ "}{"
     , "\\begin{tikzpicture}[cordadiagram]"
-    , drawRack3 2 2 (cells c)
-    , connectionsRack3 (cells c)
-    , drawRack3 2 2 (cells c)
+    , drawDiagramIn3d 2 2.5 (cells c)
     , "\\end{tikzpicture}}" ]
-
-
--- \begin{scope}[every path/.style={-,out=0,in=180}]
---  \draw (prodOne-o2) to (prodTwo-i2);
---  \draw (prodOne-o1) to (prodTwo-i1);
--- \end{scope}
-
