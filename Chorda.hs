@@ -17,12 +17,13 @@ import Style
 import Draw
 import Print
 
--- Positioning a list of things, relative to a height.
+-- | Positions a list of things, relative to height. Given a height h and a list
+-- of positionable things; it divides the height by the length of the list.
 positionX :: (Positioned a) => Double -> [a] -> [a]
-positionX d l = zipWith pos [0..] l
+positionX h l = zipWith pos [0..] l
   where
     pos :: (Positioned a) => Int -> a -> a
-    pos n = setX (d / (dI (length l) * 2.0) * (dI n * 2.0 + 1.0))
+    pos n = setX (h / (dI (length l) * 2.0) * (dI n * 2.0 + 1.0))
 
 positionRack2 :: Double -> [Cell2] -> [Cell2]
 positionRack2 s r = positionNodes $ positionTargets 0.0 (positionSources 0.0 r)
@@ -182,7 +183,7 @@ drawDiagramIn3d d h c = unlines $ zipWith drawInScope [0..] c
 
 connectIds :: Id -> Id -> String
 connectIds firstId secondId =
-      "\\draw [red!30] ("
+      "\\draw [borders] ("
       ++ firstId
       ++ ".center) to [out=-90,in=90] ("
       ++ secondId
@@ -190,16 +191,33 @@ connectIds firstId secondId =
 
 
 data Diagram3d = Diagram3d
-  { commandName :: String
-  , cells :: [[[Cell3]]]
+  { commandName3d :: String
+  , cells3d :: [[[Cell3]]]
   }
 
-mkDiagram3D :: String -> [[[Cell3]]] -> Diagram3d
-mkDiagram3D s c = Diagram3d s (identify "i" c)
+data Diagram2d = Diagram2d
+  { commandName2d :: String
+  , cells2d :: [[Cell2]]
+  }
+
+
+mkDiagram3D :: String -> [[[Cell3]]] -> String
+mkDiagram3D s c = show $ Diagram3d s (identify "i" c)
 
 instance Show Diagram3d where
   show c = unlines
-    [ "\\newcommand{\\" ++ commandName c ++ "}{"
+    [ "\\newcommand{\\" ++ commandName3d c ++ "}{"
     , "\\begin{tikzpicture}[cordadiagram]"
-    , drawDiagramIn3d 2 2.5 (cells c)
+    , drawDiagramIn3d 2 2.5 (cells3d c)
     , "\\end{tikzpicture}}" ]
+
+mkDiagram2D :: String -> [[Cell2]] -> String
+mkDiagram2D s c = show $ Diagram2d s (identify "i" c)
+
+instance Show Diagram2d where
+  show c = unlines
+    [ "\\newcommand{\\" ++ commandName2d c ++ "}{"
+    , "\\begin{tikzpicture}[cordadiagram]"
+    , drawDiagram2 2 (cells2d c)
+    , "\\end{tikzpicture}}"
+    ]

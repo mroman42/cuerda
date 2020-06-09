@@ -6,7 +6,6 @@ module Example where
 import Chorda
 
 
-
 -- We will draw a pseudomonoid (C,⊗,I) in the monoidal bicategory of categories
 -- (Cat,×,1), which is the same as a monoidal category. We start by declaring
 -- some primitive cells.
@@ -28,8 +27,10 @@ main = do
   -- proceed to list the diagrams that should compose our library.
   putStrLn "\\ProvidesPackage{mydiagrams}[2020/05/09 v0.1 My Diagrams.]"
 
-  putStrLn $ unlines $ map show
+  putStrLn $ unlines
     [ mkDiagram3D "associatorDiagram" [[[alphainv]],[[alpha]]]
     , mkDiagram3D "leftUnitorDiagram" [[[lambdainv]],[[lambda]]]
     , mkDiagram3D "rightUnitorDiagram" [[[rhoinv]],[[rho]]]
+    , mkDiagram2D "assocOne" [[idt c,o],[o]]
+    , mkDiagram2D "assocTwo" [[o,idt c],[o]]
     ]
