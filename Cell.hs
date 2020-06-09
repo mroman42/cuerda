@@ -73,8 +73,8 @@ type Diagram3 = [[[Cell3]]]
 cell3 :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
 cell3 l s t = Cell3 l s t "none" 0.0 0.0 Transformation
 
-transf :: Label -> Cell2
-transf l = Cell2 l [] [] "none" 0.0 0.0 Transformation
+transf :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
+transf = cell3
 
 -- transf :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
 -- transf l s t = Cell3 l s t "none" 0.0 0.0 Transformation

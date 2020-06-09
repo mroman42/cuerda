@@ -4,7 +4,7 @@
 # @file
 # @version 0.1
 
-example.pdf: mydiagrams.sty example.tex
+example.pdf: mydiagrams.sty example.tex chorda.sty
 	pdflatex example.tex
 
 mydiagrams.sty: *.hs

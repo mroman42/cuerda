@@ -6,6 +6,7 @@ module Chorda
   , module Connect
   , module Style
   , module Draw
+  , module Print
   , module Chorda )
 where
 
@@ -14,6 +15,7 @@ import Identify
 import Connect
 import Style
 import Draw
+import Print
 
 -- Positioning a list of things, relative to a height.
 positionX :: (Positioned a) => Double -> [a] -> [a]
@@ -178,6 +180,25 @@ connectIds firstId secondId =
       ++ ".center) to [out=-90,in=90] ("
       ++ secondId
       ++ ".center);"
+
+
+data Diagram3d = Diagram3d
+  { commandName :: String
+  , cells :: [[Cell3]]
+  }
+
+mkDiagram3D :: String -> [[Cell3]] -> Diagram3d
+mkDiagram3D s c = Diagram3d s (identify "i" c)
+
+instance Show Diagram3d where
+  show c = unlines
+    [ "\\newcommand{\\" ++ commandName c ++ "}{"
+    , "\\begin{tikzpicture}[cordadiagram]"
+    , drawRack3 2 2 (cells c)
+    , connectionsRack3 (cells c)
+    , drawRack3 2 2 (cells c)
+    , "\\end{tikzpicture}}" ]
+
 
 -- \begin{scope}[every path/.style={-,out=0,in=180}]
 --  \draw (prodOne-o2) to (prodTwo-i2);
