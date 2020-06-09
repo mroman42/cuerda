@@ -8,7 +8,7 @@ test.pdf: test.tex
 	pdflatex $<
 
 test.tex: *.hs latexHeader.tex latexFooter.tex
-	runhaskell Chorda.hs > $@
+	runhaskell Example.hs > $@
 
 clean:
 	rm -rf test.tex test.pdf *.hi *.o *.aux *.log .texfrag* .auctex-auto*

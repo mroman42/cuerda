@@ -19,13 +19,12 @@ source-repository head
 
 
 library
-  exposed-modules:     Chorda
-                     , Connect
-                     , Diagram
-                     , Draw
-                     , Identify
-                     , Style
-  -- other-modules:
+  hs-source-dirs:    ./
+  exposed-modules:   Connect
+                     Draw
+                     Identify
+                     Style
+                     Cell
   other-extensions:    AllowAmbiguousTypes
                      , ConstraintKinds
                      , DataKinds
@@ -49,7 +48,7 @@ library
                      , UndecidableInstances
 
   build-depends:       base ^>=4.12.0.0
-
-  hs-source-dirs:    source
+  hs-source-dirs:      source
 
   default-language:    Haskell2010
+  ghc-options:        -Wall
