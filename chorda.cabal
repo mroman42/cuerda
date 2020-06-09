@@ -1,0 +1,55 @@
+cabal-version:       2.4
+
+name:                chorda
+version:             0.1.0.0
+synopsis:            String and surface TikZ diagrams from Haskell code
+description:         Chorda is a library for producing string and surface diagrams of monoidal categories and monoidal bicategories from Haskell code. It is very loosely inspired on the theory of associative n-categories for the internal representation.
+homepage:            https://github.com/mroman42/chorda
+bug-reports:         https://github.com/mroman42/chorda/issues
+license:             GPL-3.0-or-later
+license-file:        LICENSE
+author:              Mario Roman
+maintainer:          mromang08@gmail.com
+category:            Diagrams
+extra-source-files:  readme.org
+
+source-repository head
+  type:     git
+  location: https://github.com/mroman42/chorda
+
+
+library
+  exposed-modules:     Chorda
+                     , Connect
+                     , Diagram
+                     , Draw
+                     , Identify
+                     , Style
+  -- other-modules:
+  other-extensions:    AllowAmbiguousTypes
+                     , ConstraintKinds
+                     , DataKinds
+                     , ExistentialQuantification
+                     , FlexibleContexts
+                     , FlexibleInstances
+                     , FunctionalDependencies
+                     , GADTs
+                     , ImplicitParams
+                     , IncoherentInstances
+                     , KindSignatures
+                     , LiberalTypeSynonyms
+                     , MultiParamTypeClasses
+                     , RankNTypes
+                     , ScopedTypeVariables
+                     , StandaloneDeriving
+                     , TypeApplications
+                     , TypeFamilies
+                     , TypeOperators
+                     , TypeSynonymInstances
+                     , UndecidableInstances
+
+  build-depends:       base ^>=4.12.0.0
+
+  hs-source-dirs:    source
+
+  default-language:    Haskell2010

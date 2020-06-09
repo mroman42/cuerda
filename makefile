@@ -11,7 +11,11 @@ test.tex: *.hs latexHeader.tex latexFooter.tex
 	runhaskell Chorda.hs > $@
 
 clean:
-	rm -f test.tex test.pdf
+	rm -rf test.tex test.pdf *.hi *.o *.aux *.log .texfrag* .auctex-auto*
+
+tarball:
+	rm -f chordahs.tar.gz
+	tar -czvf chordahs.tar.gz *.hs *.tex *.org makefile
 
 .INTERMEDIATE: test.tex
 .PHONY: clean
