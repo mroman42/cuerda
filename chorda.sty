@@ -1,0 +1,36 @@
+\ProvidesPackage{chorda}[2020/05/09 v0.1 TikZ macros for Corda.]
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,shapes}
+
+\tikzset{ morphism/.style=
+    { circle
+    , minimum height = #1
+    , minimum width = .4cm
+    , fill=white
+    , inner sep=1pt
+    , draw }
+  , morphism/.default=.4cm }
+
+\tikzset{ transformation/.style=
+    { circle
+    , minimum height = #1
+    , minimum width = .4cm
+    , fill=white
+    , inner sep=1pt
+    , draw=red
+    , text=red
+  }
+ , transformation/.default=.4cm }
+
+\tikzset{ hint/.style=
+    { circle
+    %, draw=black!20
+    , dashed }
+  , hint/.default=.2cm }
+
+\tikzset{ tilted/.style=
+  { x={(1,0)}
+  , y={(0.6,0.6)}
+  }
+}

@@ -4,10 +4,10 @@
 # @file
 # @version 0.1
 
-test.pdf: test.tex
-	pdflatex $<
+example.pdf: mydiagrams.sty example.tex
+	pdflatex example.tex
 
-test.tex: *.hs latexHeader.tex latexFooter.tex
+mydiagrams.sty: *.hs
 	runhaskell Example.hs > $@
 
 clean:

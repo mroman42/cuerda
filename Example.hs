@@ -1,12 +1,10 @@
--- | 
+-- | This module exemplifies how to use Corda. Some cells are declared and then
+-- some diagrams are constructed on top of them.
 
 module Example where
 
 import Chorda
 
-----
--- Examples
-----
 example :: [Cell2]
 example = [f,g,h]
   where
@@ -61,15 +59,6 @@ example4 = [[ol],[t,idt a],[or]]
     t = cell2 "T" [a] [a]
     or = cell2 "\\otimes" [a,a] [a]
 
-
--- exampleConn :: Connections
--- exampleConn =
---   [ ( (1,0,0) , (0,0,0) )
---   , ( (1,0,0) , (0,1,0) )
---   , ( (2,0,0) , (1,0,0) )
---   , ( (2,1,1) , (1,0,0) )
---   ]
-
 exampleAssoc :: [[Cell3]]
 exampleAssoc = identify "" [[alpha]]
   where
@@ -99,15 +88,22 @@ exampleTambara = identify "" [[y]]
 
     y = cell3 "t" [[oR],[t],[oL]] [[idt c, idt c],[t,idt c],[idt c, idt c]]
 
+
+
 main :: IO ()
 main = do
-  readFile "latexHeader.tex" >>= putStrLn
+  -- readFile "latexHeader.tex" >>= putStrLn
 
   -- EXAMPLE ASSOC
-  -- let ex = exampleAssoc
-  -- putStrLn $ drawRack3 1.5 2 ex
-  -- putStrLn $ connectionsRack3 ex
-  -- putStrLn $ drawRack3 1.5 2 ex
+  putStrLn "\\ProvidesPackage{mydiagrams}[2020/05/09 v0.1 My Diagrams.]"
+  putStrLn "\\newcommand{\\assocDiagram}{"
+  putStrLn "\\begin{tikzpicture}"
+  let ex = exampleAssoc
+  putStrLn $ drawRack3 1.5 2 ex
+  putStrLn $ connectionsRack3 ex
+  putStrLn $ drawRack3 1.5 2 ex
+  putStrLn "\\end{tikzpicture}"
+  putStrLn "}"
 
   -- EXAMPLE 6
   -- let ex = identify "u" example6
@@ -117,7 +113,7 @@ main = do
   -- putStrLn $ fili ex
 
   -- EXAMPLE 4
-  let ex = identify "u" example4
-  putStrLn $ drawDiagram2 2 ex
+  -- let ex = identify "u" example4
+  -- putStrLn $ drawDiagram2 2 ex
 
-  readFile "latexFooter.tex" >>= putStrLn
+  --  readFile "latexFooter.tex" >>= putStrLn
