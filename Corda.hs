@@ -20,8 +20,6 @@ import Print
 
 
 
-
-
 -- 3D positioning is easier because we are going to actually use scopes anyway.
 -- We should just map the positioning to every layer and then position the core nodes.
 drawDiagram2 :: Double -> Diagram2 -> String

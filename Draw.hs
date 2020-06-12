@@ -10,7 +10,7 @@ class Draw a where
 
 instance Draw Cell1 where
   draw c =
-    -- Grey hint
+    -- Grey hint, optionally
     "\\node ("
     ++ "none"
     ++ ") [hint] at ("
@@ -66,7 +66,6 @@ instance Draw Cell2 where
       ++ ") {$"
       ++ name2 c
       ++ "$};"
-
 
     drawIdentity :: Cell2 -> String
     drawIdentity c =

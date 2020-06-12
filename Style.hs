@@ -2,5 +2,6 @@
 
 module Style where
 
-data Style = Morphism | Identity | Space | Transformation
+data Style =
+  Morphism | Identity | Space | Transformation | Empty
   deriving (Eq)

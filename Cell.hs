@@ -1,5 +1,5 @@
--- |
 {-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
+
 
 module Cell where
 
@@ -76,6 +76,14 @@ cell3 l s t = Cell3 l s t "none" 0.0 0.0 Transformation
 
 transf :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
 transf = cell3
+
+idn :: Cell2 -> Cell3
+idn a = Cell3 "i" [[a]] [[a]] "none" 0.0 0.0 Identity
+
+idc :: Diagram2 -> Diagram3
+idc = map (map (\o -> [idn o]))
+
+
 
 class Shiftable a where
   shiftX :: Double -> a -> a
