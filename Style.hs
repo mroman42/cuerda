@@ -1,4 +1,4 @@
--- | 
+-- | Declares multiple styles for drawing morphisms.
 
 module Style where
 

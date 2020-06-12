@@ -1,6 +1,8 @@
--- | 
-
-module Connect where
+module Connect
+  ( connection
+  , connections
+  , connectionsRack3
+  ) where
 
 import Cell
 import Style
@@ -8,7 +10,8 @@ import Style
 dI :: Int -> Double
 dI = fromIntegral
 
--- Connects an identified Cell2
+-- Connects an identified Cell of dimension 2, a different connection needs to
+-- be declared for every style.  Note how we assume the cells are identified.
 connection :: Cell2 -> String
 connection c = connectWith (style c) c
   where

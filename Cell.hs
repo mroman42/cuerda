@@ -5,11 +5,12 @@ module Cell where
 
 import Style
 
+-- Declares the type of an ID and of a Label. Ids represent the Tikz ids for the
+-- nodes; the labels, on the other hand, are the names given to the nodes.
 type Id = String
 type Label = String
 
-
--- Cells
+-- Cells, 1 dimensional
 data Cell1 = Cell1
   { name1 :: Label
   , id1 :: Id
@@ -75,9 +76,6 @@ cell3 l s t = Cell3 l s t "none" 0.0 0.0 Transformation
 
 transf :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
 transf = cell3
-
--- transf :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
--- transf l s t = Cell3 l s t "none" 0.0 0.0 Transformation
 
 class Shiftable a where
   shiftX :: Double -> a -> a

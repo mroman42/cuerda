@@ -1,0 +1,6 @@
+\ProvidesPackage{mintedcode}[2020/03/06 Minted code]
+
+\usepackage{minted}
+
+% Syntax errors should not be marked with a red box.
+\AtBeginEnvironment{minted}{\renewcommand{\fcolorbox}[4][]{#4}}

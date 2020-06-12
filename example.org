@@ -1,12 +1,9 @@
-#+TITLE: Corda
+#+TITLE: Example
 #+latex_header: \usepackage{/home/mario/roam/code/chordahs/corda}
 
-*Corda* is a library for producing string and surface diagrams on Tikz. It is very loosely inspired on the theory of /associative n-categories/ for its internal representation (see [[https://arxiv.org/abs/1812.10586][Dorn (2018)]] and [[https://arxiv.org/abs/1902.03831][Reutter and Vicary (2019)]]) in that unitality is not strict.  For the end user, this means you will have to introduce some identity morphisms by hand, but the internal representation is greatly simplified because of this.
-
-* Usage example
 This is an example of how to use Corda in org-mode.
 
-** 2d diagrams
+* 2d diagrams
 #+BEGIN_SRC runhaskell :results drawer replace
 import Corda
 c = obj "\\mathbb{C}"
@@ -192,7 +189,7 @@ main = do
 \]
 :end:
 
-** 3d diagrams
+* 3d diagrams
 #+BEGIN_SRC runhaskell :results drawer replace
 import Corda
 c = obj "\\mathbb{C}"
@@ -2124,4 +2121,3 @@ main = do
 \end{tikzpicture}
 \]
 :end:
-
