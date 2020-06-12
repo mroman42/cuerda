@@ -48,7 +48,7 @@ main = do
 
 [[file:https://github.com/mroman42/corda/raw/master/example2.png]]
 * Referencing Corda
-As of June 2020, the best way of referencing \textsf{Corda} is by pointing to its GitHub repository.
+As of June 2020, the best way of referencing *Corda* is by pointing to its GitHub repository.
 
 #+BEGIN_SRC bibtex
 @misc{corda20,
