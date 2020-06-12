@@ -10,7 +10,7 @@ This is an example of how to use Corda in org-mode.
 #+BEGIN_SRC runhaskell :results drawer replace
 import Corda
 c = obj "\\mathbb{C}"
-o = morph "m" [c,c] [c]
+o = morph "\\mu" [c,c] [c]
 i = morph "\\eta" [] [c]
 main = do
   putStr "\\["
@@ -21,6 +21,8 @@ main = do
   latex2D [[idt c,i],[o]]
   putStr "\\]"
 #+END_SRC
+
+[[file:https://github.com/mroman42/corda/raw/master/example1.png]]
 
 #+RESULTS:
 :results:
