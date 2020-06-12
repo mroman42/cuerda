@@ -47,3 +47,14 @@ main = do
 #+END_SRC
 
 [[file:https://github.com/mroman42/corda/raw/master/example2.png]]
+* Referencing Corda
+As of June 2020, the best way of referencing \textsf{Corda} is by pointing to its GitHub repository.
+
+#+BEGIN_SRC bibtex
+@misc{corda20,
+  author = {Mario Román},
+  title = {Corda library, Version 0.1},
+  howpublished = {GitHub \url{https://github.com/mroman42/corda}},
+  year = {2020}
+}
+#+END_SRC
