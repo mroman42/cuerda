@@ -48,6 +48,9 @@ idt a = Cell2 "[idt]" [a] [a] "none" 0.0 0.0 Identity
 space :: Cell2
 space = Cell2 "[space]" [] [] "none" 0.0 0.0 Space
 
+emptySpace :: Cell1 -> Cell2
+emptySpace a = Cell2 "[empty]" [a] [a] "none" 0.0 0.0 Space
+
 type Diagram2 = [[Cell2]]
 
 
@@ -76,6 +79,12 @@ cell3 l s t = Cell3 l s t "none" 0.0 0.0 Transformation
 
 transf :: Label -> [[Cell2]] -> [[Cell2]] -> Cell3
 transf = cell3
+
+identi :: [[Cell2]] -> Cell3
+identi s = Cell3 "" s s "none" 0.0 0.0 Identity
+
+identi2 :: [[Cell2]] -> [[Cell2]] -> Cell3
+identi2 s t = Cell3 "" s t "none" 0.0 0.0 Identity
 
 idn :: Cell2 -> Cell3
 idn a = Cell3 "i" [[a]] [[a]] "none" 0.0 0.0 Identity

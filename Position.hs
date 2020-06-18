@@ -1,14 +1,19 @@
 -- | Two-dimensional positioning of nodes in a diagram.
 
 module Position
-  ( positionDiagram2 )
+  ( positionDiagram2
+  , PositionedDiagram2
+  )
 where
+
 
 import Cell
 import Identify
-import Draw
 
-positionDiagram2 :: Double -> Diagram2 -> Diagram2
+type PositionedDiagram2 = Diagram2
+type PositionedDiagram3 = Diagram3
+
+positionDiagram2 :: Double -> Diagram2 -> PositionedDiagram2
 positionDiagram2 d c = zipWith shiftY (map dI [0..]) $ map (positionRack2 d) c
 
 positionRack2 :: Double -> [Cell2] -> [Cell2]
