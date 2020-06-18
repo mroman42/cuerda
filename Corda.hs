@@ -41,6 +41,18 @@ writeTikz3 filename c = do
       , "\\end{tikzpicture}"
       , "\\end{document}" ]
 
+writeTikz2 :: String -> Diagram2 -> IO ()
+writeTikz2 filename c = do
+  writeFile filename $
+    filterEmptyLines $ unlines
+      [ "\\documentclass[crop,tikz]{standalone}"
+      , "\\usepackage{corda}"
+      , "\\begin{document}"
+      , "\\begin{tikzpicture}[cordadiagram]"
+      , drawDiagram2 2 (identify "i" c)
+      , "\\end{tikzpicture}"
+      , "\\end{document}" ]
+
 latex3D :: [[[Cell3]]] -> IO ()
 latex3D c = putStr $ filterEmptyLines $ unlines
   [ "\\begin{tikzpicture}[cordadiagram]"
@@ -89,4 +101,6 @@ alpha = transf "\\hat\\alpha" [[idt c,o],[o]] [[o,idt c],[o]]
 alphainv = transf "\\hat\\alpha" [[o,idt c],[o]] [[idt c,o],[o]]
 
 main :: IO ()
-main = writeTikz3 "test1.tex" [[[alphainv]],[[alpha]]]
+main = do
+  writeTikz3 "test1.tex" [[[alphainv]],[[alpha]]]
+  writeTikz2 "test2.tex" [[idt c,idt c,i],[idt c,o],[o]]

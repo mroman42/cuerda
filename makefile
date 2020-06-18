@@ -4,12 +4,15 @@
 # @file
 # @version 0.1
 
-all: test1.pdf
+all: test1.pdf test2.pdf
 
 %.pdf: %.tex
 	pdflatex --shell-escape  --interaction=nonstopmode $<
 
 test1.tex: mydiagrams.sty corda.sty *.hs
+	runhaskell Corda.hs
+
+test2.tex: mydiagrams.sty corda.sty *.hs
 	runhaskell Corda.hs
 
 example.pdf: mydiagrams.sty example.tex corda.sty

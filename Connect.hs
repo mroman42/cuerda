@@ -1,7 +1,7 @@
 module Connect
   ( connection
   , connections
-  , connectionsRack3
+  , connection3
   ) where
 
 import Cell
@@ -10,7 +10,7 @@ import Style
 dI :: Int -> Double
 dI = fromIntegral
 
--- Connects an identified Cell of dimension 2, a different connection needs to
+-- | Connects an identified Cell of dimension 2, a different connection needs to
 -- be declared for every style.  Note how we assume the cells are identified.
 connection :: Cell2 -> String
 connection c = connectWith (style c) c
@@ -43,38 +43,39 @@ connectMorph c = unlines $ concat
   , zipWith kT [0..] (target2 c)
   ]
   where
-    lenS :: Double
-    lenS = dI $ length (source2 c)
-    lenT :: Double
-    lenT = dI $ length (target2 c)
+    lenS :: Int
+    lenS = length (source2 c)
+    lenT :: Int
+    lenT = length (target2 c)
 
     kS :: Int -> Cell1 -> String
-    kS n p =
-      "\\draw ("
-      ++ id1 p
-      ++ ".center) to [out=0, in="
-      ++ show (angleS lenS (dI n))
-      ++ "] ("
-      ++ id2 c
-      ++ ".center);"
+    kS n p = concat
+     ["\\draw (",id1 p,".center) to [out=0, in=",show (angleS lenS n),"] (",id2 c,".center);"]
 
     kT :: Int -> Cell1 -> String
     kT n p =
       "\\draw ("
       ++ id1 p
-      ++ ".center) to [out=180, in="
-      ++ show (angleT lenT (dI n))
+      ++ ") to [out=180, in="
+      ++ show (angleT lenT n)
       ++ "] ("
       ++ id2 c
-      ++ ".center);"
+      ++ ");"
 
-    angleS :: Double -> Double -> Double
-    angleS n m = ((m+1) / (n+1) * (-180.0)) + 270.0
-    angleT :: Double -> Double -> Double
-    angleT n m = ((m+1) / (n+1) * (180.0)) - 90.0
+    -- Rounded version, as by E. Di Lavore.
+    angleS :: Int -> Int -> Double
+    angleS n m = 180.0/((dI n)-1)*(dI m) + 90.0
+
+    -- Previous version
+    angleS' :: Int -> Int -> Double
+    angleS' n m = ((dI m+1) / (dI n+1) * (-180.0)) + 270.0
+
+    angleT :: Int -> Int -> Double
+    angleT n m = (((dI m)+1) / ((dI n)+1) * (180.0)) - 90.0
 
 connections :: Diagram2 -> String
 connections = unlines . concat . map (map connection)
+
 
 -- Connects an identified 3 cell.
 connection3 :: Cell3 -> String
