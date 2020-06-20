@@ -1,0 +1,342 @@
+\documentclass[crop,tikz]{standalone}
+\usepackage{corda}
+\begin{document}
+\begin{tikzpicture}[cordadiagram]
+\begin{scope}[yshift=2.5cm]
+\begin{scope}[tilted,yshift=0.0cm]
+\coordinate (i100s00c) at (-0.5, 0.5){};
+\coordinate (i100s00s0c) at (-1.0, 0.3333333333333333){};
+\coordinate (i100s00t0c) at (0.0, 0.5){};
+\coordinate (i100s01c) at (-0.5, 1.5){};
+\coordinate (i100s01s0c) at (-1.0, 1.0){};\coordinate (i100s01s1c) at (-1.0, 1.6666666666666665){};
+\coordinate (i100s01t0c) at (0.0, 1.5){};
+\coordinate (i100s10c) at (0.5, 1.0){};
+\coordinate (i100s10s0c) at (0.0, 0.5){};\coordinate (i100s10s1c) at (0.0, 1.5){};
+\coordinate (i100s10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=2.5cm]
+\coordinate (i100t00c) at (-0.5, 0.5){};
+\coordinate (i100t00s0c) at (-1.0, 0.3333333333333333){};\coordinate (i100t00s1c) at (-1.0, 1.0){};
+\coordinate (i100t00t0c) at (0.0, 0.5){};
+\coordinate (i100t01c) at (-0.5, 1.5){};
+\coordinate (i100t01s0c) at (-1.0, 1.6666666666666665){};
+\coordinate (i100t01t0c) at (0.0, 1.5){};
+\coordinate (i100t10c) at (0.5, 1.0){};
+\coordinate (i100t10s0c) at (0.0, 0.5){};\coordinate (i100t10s1c) at (0.0, 1.5){};
+\coordinate (i100t10t0c) at (1.0, 1.0){};
+\end{scope}\draw [borders] (i100t00s0c.center) to [out=-90,in=90] (i100s00s0c.center);
+\draw [borders] (i100t00s1c.center) to [out=-90,in=90] (i100s01s0c.center);
+\draw [borders] (i100t01s0c.center) to [out=-90,in=90] (i100s01s1c.center);
+\draw [borders] (i100t10t0c.center) to [out=-90,in=90] (i100s10t0c.center);
+\begin{scope}[tilted,yshift=2.5cm]
+\draw (i100t00s0c.center) to [out=0, in=90.0] (i100t00c.center);
+\draw (i100t00s1c.center) to [out=0, in=270.0] (i100t00c.center);
+\draw (i100t00t0c) to [out=180, in=0.0] (i100t00c);
+\draw (i100t01s0c.center) to [in=180,out=0] (i100t01t0c.center);
+\draw (i100t10s0c.center) to [out=0, in=90.0] (i100t10c.center);
+\draw (i100t10s1c.center) to [out=0, in=270.0] (i100t10c.center);
+\draw (i100t10t0c) to [out=180, in=0.0] (i100t10c);
+\node (i100t00c) [morphism] at (-0.5, 0.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i100t00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i100t00s1c) at (-1.0, 1.0){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100t00t0c) at (0.0, 0.5){};
+\coordinate (i100t01c) at (-0.5, 1.5) {};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i100t01s0c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100t01t0c) at (0.0, 1.5){};
+\node (i100t10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100t10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100t10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i100t10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=1.25cm]
+\node (i100c) [transformation] at (0.0, 1.0) {$\hat\alpha$};
+\end{scope}\begin{scope}[tilted,yshift=0.0cm]
+\draw (i100s00s0c.center) to [in=180,out=0] (i100s00t0c.center);
+\draw (i100s01s0c.center) to [out=0, in=90.0] (i100s01c.center);
+\draw (i100s01s1c.center) to [out=0, in=270.0] (i100s01c.center);
+\draw (i100s01t0c) to [out=180, in=0.0] (i100s01c);
+\draw (i100s10s0c.center) to [out=0, in=90.0] (i100s10c.center);
+\draw (i100s10s1c.center) to [out=0, in=270.0] (i100s10c.center);
+\draw (i100s10t0c) to [out=180, in=0.0] (i100s10c);
+\coordinate (i100s00c) at (-0.5, 0.5) {};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i100s00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100s00t0c) at (0.0, 0.5){};
+\node (i100s01c) [morphism] at (-0.5, 1.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i100s01s0c) at (-1.0, 1.0){};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i100s01s1c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100s01t0c) at (0.0, 1.5){};
+\node (i100s10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100s10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100s10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i100s10t0c) at (1.0, 1.0){};
+\end{scope}
+\draw [red!30] (i100s01c.center) to [out=90,in=-90] (i100c.center);
+\draw [red!30] (i100s10c.center) to [out=90,in=-90] (i100c.center);
+\draw [red!30] (i100t00c.center) to [out=-90,in=90] (i100c.center);
+\draw [red!30] (i100t10c.center) to [out=-90,in=90] (i100c.center);
+\begin{scope}[tilted,yshift=0.0cm]
+\coordinate (i100s00c) at (-0.5, 0.5){};
+\coordinate (i100s00s0c) at (-1.0, 0.3333333333333333){};
+\coordinate (i100s00t0c) at (0.0, 0.5){};
+\coordinate (i100s01c) at (-0.5, 1.5){};
+\coordinate (i100s01s0c) at (-1.0, 1.0){};\coordinate (i100s01s1c) at (-1.0, 1.6666666666666665){};
+\coordinate (i100s01t0c) at (0.0, 1.5){};
+\coordinate (i100s10c) at (0.5, 1.0){};
+\coordinate (i100s10s0c) at (0.0, 0.5){};\coordinate (i100s10s1c) at (0.0, 1.5){};
+\coordinate (i100s10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=2.5cm]
+\coordinate (i100t00c) at (-0.5, 0.5){};
+\coordinate (i100t00s0c) at (-1.0, 0.3333333333333333){};\coordinate (i100t00s1c) at (-1.0, 1.0){};
+\coordinate (i100t00t0c) at (0.0, 0.5){};
+\coordinate (i100t01c) at (-0.5, 1.5){};
+\coordinate (i100t01s0c) at (-1.0, 1.6666666666666665){};
+\coordinate (i100t01t0c) at (0.0, 1.5){};
+\coordinate (i100t10c) at (0.5, 1.0){};
+\coordinate (i100t10s0c) at (0.0, 0.5){};\coordinate (i100t10s1c) at (0.0, 1.5){};
+\coordinate (i100t10t0c) at (1.0, 1.0){};
+\end{scope}\draw [borders] (i100t00s0c.center) to [out=-90,in=90] (i100s00s0c.center);
+\draw [borders] (i100t00s1c.center) to [out=-90,in=90] (i100s01s0c.center);
+\draw [borders] (i100t01s0c.center) to [out=-90,in=90] (i100s01s1c.center);
+\draw [borders] (i100t10t0c.center) to [out=-90,in=90] (i100s10t0c.center);
+\begin{scope}[tilted,yshift=2.5cm]
+\draw (i100t00s0c.center) to [out=0, in=90.0] (i100t00c.center);
+\draw (i100t00s1c.center) to [out=0, in=270.0] (i100t00c.center);
+\draw (i100t00t0c) to [out=180, in=0.0] (i100t00c);
+\draw (i100t01s0c.center) to [in=180,out=0] (i100t01t0c.center);
+\draw (i100t10s0c.center) to [out=0, in=90.0] (i100t10c.center);
+\draw (i100t10s1c.center) to [out=0, in=270.0] (i100t10c.center);
+\draw (i100t10t0c) to [out=180, in=0.0] (i100t10c);
+\node (i100t00c) [morphism] at (-0.5, 0.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i100t00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i100t00s1c) at (-1.0, 1.0){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100t00t0c) at (0.0, 0.5){};
+\coordinate (i100t01c) at (-0.5, 1.5) {};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i100t01s0c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100t01t0c) at (0.0, 1.5){};
+\node (i100t10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100t10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100t10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i100t10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=1.25cm]
+\node (i100c) [transformation] at (0.0, 1.0) {$\hat\alpha$};
+\end{scope}\begin{scope}[tilted,yshift=0.0cm]
+\draw (i100s00s0c.center) to [in=180,out=0] (i100s00t0c.center);
+\draw (i100s01s0c.center) to [out=0, in=90.0] (i100s01c.center);
+\draw (i100s01s1c.center) to [out=0, in=270.0] (i100s01c.center);
+\draw (i100s01t0c) to [out=180, in=0.0] (i100s01c);
+\draw (i100s10s0c.center) to [out=0, in=90.0] (i100s10c.center);
+\draw (i100s10s1c.center) to [out=0, in=270.0] (i100s10c.center);
+\draw (i100s10t0c) to [out=180, in=0.0] (i100s10c);
+\coordinate (i100s00c) at (-0.5, 0.5) {};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i100s00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100s00t0c) at (0.0, 0.5){};
+\node (i100s01c) [morphism] at (-0.5, 1.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i100s01s0c) at (-1.0, 1.0){};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i100s01s1c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100s01t0c) at (0.0, 1.5){};
+\node (i100s10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i100s10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i100s10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i100s10t0c) at (1.0, 1.0){};
+\end{scope}
+\end{scope}
+\begin{scope}[yshift=0.0cm]
+\begin{scope}[tilted,yshift=0.0cm]
+\coordinate (i000s00c) at (-0.5, 0.5){};
+\coordinate (i000s00s0c) at (-1.0, 0.3333333333333333){};\coordinate (i000s00s1c) at (-1.0, 1.0){};
+\coordinate (i000s00t0c) at (0.0, 0.5){};
+\coordinate (i000s01c) at (-0.5, 1.5){};
+\coordinate (i000s01s0c) at (-1.0, 1.6666666666666665){};
+\coordinate (i000s01t0c) at (0.0, 1.5){};
+\coordinate (i000s10c) at (0.5, 1.0){};
+\coordinate (i000s10s0c) at (0.0, 0.5){};\coordinate (i000s10s1c) at (0.0, 1.5){};
+\coordinate (i000s10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=2.5cm]
+\coordinate (i000t00c) at (-0.5, 0.5){};
+\coordinate (i000t00s0c) at (-1.0, 0.3333333333333333){};
+\coordinate (i000t00t0c) at (0.0, 0.5){};
+\coordinate (i000t01c) at (-0.5, 1.5){};
+\coordinate (i000t01s0c) at (-1.0, 1.0){};\coordinate (i000t01s1c) at (-1.0, 1.6666666666666665){};
+\coordinate (i000t01t0c) at (0.0, 1.5){};
+\coordinate (i000t10c) at (0.5, 1.0){};
+\coordinate (i000t10s0c) at (0.0, 0.5){};\coordinate (i000t10s1c) at (0.0, 1.5){};
+\coordinate (i000t10t0c) at (1.0, 1.0){};
+\end{scope}\draw [borders] (i000t00s0c.center) to [out=-90,in=90] (i000s00s0c.center);
+\draw [borders] (i000t01s0c.center) to [out=-90,in=90] (i000s00s1c.center);
+\draw [borders] (i000t01s1c.center) to [out=-90,in=90] (i000s01s0c.center);
+\draw [borders] (i000t10t0c.center) to [out=-90,in=90] (i000s10t0c.center);
+\begin{scope}[tilted,yshift=2.5cm]
+\draw (i000t00s0c.center) to [in=180,out=0] (i000t00t0c.center);
+\draw (i000t01s0c.center) to [out=0, in=90.0] (i000t01c.center);
+\draw (i000t01s1c.center) to [out=0, in=270.0] (i000t01c.center);
+\draw (i000t01t0c) to [out=180, in=0.0] (i000t01c);
+\draw (i000t10s0c.center) to [out=0, in=90.0] (i000t10c.center);
+\draw (i000t10s1c.center) to [out=0, in=270.0] (i000t10c.center);
+\draw (i000t10t0c) to [out=180, in=0.0] (i000t10c);
+\coordinate (i000t00c) at (-0.5, 0.5) {};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i000t00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000t00t0c) at (0.0, 0.5){};
+\node (i000t01c) [morphism] at (-0.5, 1.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i000t01s0c) at (-1.0, 1.0){};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i000t01s1c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000t01t0c) at (0.0, 1.5){};
+\node (i000t10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000t10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000t10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i000t10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=1.25cm]
+\node (i000c) [transformation] at (0.0, 1.0) {$\hat\alpha$};
+\end{scope}\begin{scope}[tilted,yshift=0.0cm]
+\draw (i000s00s0c.center) to [out=0, in=90.0] (i000s00c.center);
+\draw (i000s00s1c.center) to [out=0, in=270.0] (i000s00c.center);
+\draw (i000s00t0c) to [out=180, in=0.0] (i000s00c);
+\draw (i000s01s0c.center) to [in=180,out=0] (i000s01t0c.center);
+\draw (i000s10s0c.center) to [out=0, in=90.0] (i000s10c.center);
+\draw (i000s10s1c.center) to [out=0, in=270.0] (i000s10c.center);
+\draw (i000s10t0c) to [out=180, in=0.0] (i000s10c);
+\node (i000s00c) [morphism] at (-0.5, 0.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i000s00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i000s00s1c) at (-1.0, 1.0){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000s00t0c) at (0.0, 0.5){};
+\coordinate (i000s01c) at (-0.5, 1.5) {};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i000s01s0c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000s01t0c) at (0.0, 1.5){};
+\node (i000s10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000s10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000s10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i000s10t0c) at (1.0, 1.0){};
+\end{scope}
+\draw [red!30] (i000s00c.center) to [out=90,in=-90] (i000c.center);
+\draw [red!30] (i000s10c.center) to [out=90,in=-90] (i000c.center);
+\draw [red!30] (i000t01c.center) to [out=-90,in=90] (i000c.center);
+\draw [red!30] (i000t10c.center) to [out=-90,in=90] (i000c.center);
+\begin{scope}[tilted,yshift=0.0cm]
+\coordinate (i000s00c) at (-0.5, 0.5){};
+\coordinate (i000s00s0c) at (-1.0, 0.3333333333333333){};\coordinate (i000s00s1c) at (-1.0, 1.0){};
+\coordinate (i000s00t0c) at (0.0, 0.5){};
+\coordinate (i000s01c) at (-0.5, 1.5){};
+\coordinate (i000s01s0c) at (-1.0, 1.6666666666666665){};
+\coordinate (i000s01t0c) at (0.0, 1.5){};
+\coordinate (i000s10c) at (0.5, 1.0){};
+\coordinate (i000s10s0c) at (0.0, 0.5){};\coordinate (i000s10s1c) at (0.0, 1.5){};
+\coordinate (i000s10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=2.5cm]
+\coordinate (i000t00c) at (-0.5, 0.5){};
+\coordinate (i000t00s0c) at (-1.0, 0.3333333333333333){};
+\coordinate (i000t00t0c) at (0.0, 0.5){};
+\coordinate (i000t01c) at (-0.5, 1.5){};
+\coordinate (i000t01s0c) at (-1.0, 1.0){};\coordinate (i000t01s1c) at (-1.0, 1.6666666666666665){};
+\coordinate (i000t01t0c) at (0.0, 1.5){};
+\coordinate (i000t10c) at (0.5, 1.0){};
+\coordinate (i000t10s0c) at (0.0, 0.5){};\coordinate (i000t10s1c) at (0.0, 1.5){};
+\coordinate (i000t10t0c) at (1.0, 1.0){};
+\end{scope}\draw [borders] (i000t00s0c.center) to [out=-90,in=90] (i000s00s0c.center);
+\draw [borders] (i000t01s0c.center) to [out=-90,in=90] (i000s00s1c.center);
+\draw [borders] (i000t01s1c.center) to [out=-90,in=90] (i000s01s0c.center);
+\draw [borders] (i000t10t0c.center) to [out=-90,in=90] (i000s10t0c.center);
+\begin{scope}[tilted,yshift=2.5cm]
+\draw (i000t00s0c.center) to [in=180,out=0] (i000t00t0c.center);
+\draw (i000t01s0c.center) to [out=0, in=90.0] (i000t01c.center);
+\draw (i000t01s1c.center) to [out=0, in=270.0] (i000t01c.center);
+\draw (i000t01t0c) to [out=180, in=0.0] (i000t01c);
+\draw (i000t10s0c.center) to [out=0, in=90.0] (i000t10c.center);
+\draw (i000t10s1c.center) to [out=0, in=270.0] (i000t10c.center);
+\draw (i000t10t0c) to [out=180, in=0.0] (i000t10c);
+\coordinate (i000t00c) at (-0.5, 0.5) {};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i000t00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000t00t0c) at (0.0, 0.5){};
+\node (i000t01c) [morphism] at (-0.5, 1.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i000t01s0c) at (-1.0, 1.0){};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i000t01s1c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000t01t0c) at (0.0, 1.5){};
+\node (i000t10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000t10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000t10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i000t10t0c) at (1.0, 1.0){};
+\end{scope}\begin{scope}[tilted,yshift=1.25cm]
+\node (i000c) [transformation] at (0.0, 1.0) {$\hat\alpha$};
+\end{scope}\begin{scope}[tilted,yshift=0.0cm]
+\draw (i000s00s0c.center) to [out=0, in=90.0] (i000s00c.center);
+\draw (i000s00s1c.center) to [out=0, in=270.0] (i000s00c.center);
+\draw (i000s00t0c) to [out=180, in=0.0] (i000s00c);
+\draw (i000s01s0c.center) to [in=180,out=0] (i000s01t0c.center);
+\draw (i000s10s0c.center) to [out=0, in=90.0] (i000s10c.center);
+\draw (i000s10s1c.center) to [out=0, in=270.0] (i000s10c.center);
+\draw (i000s10t0c) to [out=180, in=0.0] (i000s10c);
+\node (i000s00c) [morphism] at (-0.5, 0.5) {$\otimes$};
+\node (none) [hint] at (-1.0, 0.3333333333333333) {};
+\coordinate (i000s00s0c) at (-1.0, 0.3333333333333333){};
+\node (none) [hint] at (-1.0, 1.0) {};
+\coordinate (i000s00s1c) at (-1.0, 1.0){};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000s00t0c) at (0.0, 0.5){};
+\coordinate (i000s01c) at (-0.5, 1.5) {};
+\node (none) [hint] at (-1.0, 1.6666666666666665) {};
+\coordinate (i000s01s0c) at (-1.0, 1.6666666666666665){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000s01t0c) at (0.0, 1.5){};
+\node (i000s10c) [morphism] at (0.5, 1.0) {$\otimes$};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i000s10s0c) at (0.0, 0.5){};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i000s10s1c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i000s10t0c) at (1.0, 1.0){};
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+\end{document}

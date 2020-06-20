@@ -1,0 +1,65 @@
+\documentclass[crop,tikz]{standalone}
+\usepackage{corda}
+\begin{document}
+\begin{tikzpicture}[cordadiagram]
+\coordinate (i00c) at (0.5, 0.3333333333333333){};
+\coordinate (i00s0c) at (0.0, 0.5){};
+\coordinate (i00t0c) at (1.0, 0.3333333333333333){};
+\coordinate (i01c) at (0.5, 1.0){};
+\coordinate (i01s0c) at (0.0, 1.5){};
+\coordinate (i01t0c) at (1.0, 1.0){};
+\coordinate (i02c) at (0.5, 1.6666666666666665){};
+\coordinate (i02t0c) at (1.0, 1.6666666666666665){};
+\coordinate (i10c) at (1.5, 0.5){};
+\coordinate (i10s0c) at (1.0, 0.3333333333333333){};
+\coordinate (i10t0c) at (2.0, 0.5){};
+\coordinate (i11c) at (1.5, 1.5){};
+\coordinate (i11s0c) at (1.0, 1.0){};\coordinate (i11s1c) at (1.0, 1.6666666666666665){};
+\coordinate (i11t0c) at (2.0, 1.5){};
+\coordinate (i20c) at (2.5, 1.0){};
+\coordinate (i20s0c) at (2.0, 0.5){};\coordinate (i20s1c) at (2.0, 1.5){};
+\coordinate (i20t0c) at (3.0, 1.0){};
+\draw (i00s0c.center) to [in=180,out=0] (i00t0c.center);
+\draw (i01s0c.center) to [in=180,out=0] (i01t0c.center);
+\draw (i02t0c) to [out=180, in=0.0] (i02c);
+\draw (i10s0c.center) to [in=180,out=0] (i10t0c.center);
+\draw (i11s0c.center) to [out=0, in=90.0] (i11c.center);
+\draw (i11s1c.center) to [out=0, in=270.0] (i11c.center);
+\draw (i11t0c) to [out=180, in=0.0] (i11c);
+\draw (i20s0c.center) to [out=0, in=90.0] (i20c.center);
+\draw (i20s1c.center) to [out=0, in=270.0] (i20c.center);
+\draw (i20t0c) to [out=180, in=0.0] (i20c);
+\coordinate (i00c) at (0.5, 0.3333333333333333) {};
+\node (none) [hint] at (0.0, 0.5) {};
+\coordinate (i00s0c) at (0.0, 0.5){};
+\node (none) [hint] at (1.0, 0.3333333333333333) {};
+\coordinate (i00t0c) at (1.0, 0.3333333333333333){};
+\coordinate (i01c) at (0.5, 1.0) {};
+\node (none) [hint] at (0.0, 1.5) {};
+\coordinate (i01s0c) at (0.0, 1.5){};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i01t0c) at (1.0, 1.0){};
+\node (i02c) [morphism] at (0.5, 1.6666666666666665) {$I$};
+\node (none) [hint] at (1.0, 1.6666666666666665) {};
+\coordinate (i02t0c) at (1.0, 1.6666666666666665){};
+\coordinate (i10c) at (1.5, 0.5) {};
+\node (none) [hint] at (1.0, 0.3333333333333333) {};
+\coordinate (i10s0c) at (1.0, 0.3333333333333333){};
+\node (none) [hint] at (2.0, 0.5) {};
+\coordinate (i10t0c) at (2.0, 0.5){};
+\node (i11c) [morphism] at (1.5, 1.5) {$\otimes$};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i11s0c) at (1.0, 1.0){};
+\node (none) [hint] at (1.0, 1.6666666666666665) {};
+\coordinate (i11s1c) at (1.0, 1.6666666666666665){};
+\node (none) [hint] at (2.0, 1.5) {};
+\coordinate (i11t0c) at (2.0, 1.5){};
+\node (i20c) [morphism] at (2.5, 1.0) {$\otimes$};
+\node (none) [hint] at (2.0, 0.5) {};
+\coordinate (i20s0c) at (2.0, 0.5){};
+\node (none) [hint] at (2.0, 1.5) {};
+\coordinate (i20s1c) at (2.0, 1.5){};
+\node (none) [hint] at (3.0, 1.0) {};
+\coordinate (i20t0c) at (3.0, 1.0){};
+\end{tikzpicture}
+\end{document}

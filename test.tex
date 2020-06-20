@@ -1,0 +1,78 @@
+% Created 2020-06-15 Mon 11:04
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+
+\usepackage{/home/mario/roam/code/chordahs/corda}
+\author{Mario Román}
+\date{\today}
+\title{Test}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+This is an example of how to use \textbf{corda} for creating 2-dimensional diagrams.
+
+\[\begin{tikzpicture}[cordadiagram]
+\node (i00c) [morphism] at (0.5, 0.5) {$\eta$};
+\node (none) [hint] at (1.0, 0.5) {};
+\coordinate (i00t0c) at (1.0, 0.5) {};
+\coordinate (i01c) at (0.5, 1.5) {};
+\node (none) [hint] at (0.0, 1.0) {};
+\coordinate (i01s0c) at (0.0, 1.0) {};
+\node (none) [hint] at (1.0, 1.5) {};
+\coordinate (i01t0c) at (1.0, 1.5) {};
+\node (i10c) [morphism] at (1.5, 1.0) {$\mu$};
+\node (none) [hint] at (1.0, 0.5) {};
+\coordinate (i10s0c) at (1.0, 0.5) {};
+\node (none) [hint] at (1.0, 1.5) {};
+\coordinate (i10s1c) at (1.0, 1.5) {};
+\node (none) [hint] at (2.0, 1.0) {};
+\coordinate (i10t0c) at (2.0, 1.0) {};
+\draw (i00t0c.center) to [out=180, in=0.0] (i00c.center);
+\draw (i01s0c.center) to [in=180,out=0] (i01t0c.center);
+\draw (i10s0c.center) to [out=0, in=210.0] (i10c.center);
+\draw (i10s1c.center) to [out=0, in=150.0] (i10c.center);
+\draw (i10t0c.center) to [out=180, in=0.0] (i10c.center);
+\node (i00c) [morphism] at (0.5, 0.5) {$\eta$};
+\node (none) [hint] at (1.0, 0.5) {};
+\coordinate (i00t0c) at (1.0, 0.5) {};
+\coordinate (i01c) at (0.5, 1.5) {};
+\node (none) [hint] at (0.0, 1.0) {};
+\coordinate (i01s0c) at (0.0, 1.0) {};
+\node (none) [hint] at (1.0, 1.5) {};
+\coordinate (i01t0c) at (1.0, 1.5) {};
+\node (i10c) [morphism] at (1.5, 1.0) {$\mu$};
+\node (none) [hint] at (1.0, 0.5) {};
+\coordinate (i10s0c) at (1.0, 0.5) {};
+\node (none) [hint] at (1.0, 1.5) {};
+\coordinate (i10s1c) at (1.0, 1.5) {};
+\node (none) [hint] at (2.0, 1.0) {};
+\coordinate (i10t0c) at (2.0, 1.0) {};
+\end{tikzpicture}
+\quad = \quad\begin{tikzpicture}[cordadiagram]
+\coordinate (i00c) at (0.5, 1.0) {};
+\node (none) [hint] at (0.0, 1.0) {};
+\coordinate (i00s0c) at (0.0, 1.0) {};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i00t0c) at (1.0, 1.0) {};
+\coordinate (i10c) at (1.5, 1.0) {};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i10s0c) at (1.0, 1.0) {};
+\node (none) [hint] at (2.0, 1.0) {};
+\coordinate (i10t0c) at (2.0, 1.0) {};
+\draw (i00s0c.center) to [in=180,out=0] (i00t0c.center);
+\draw (i10s0c.center) to [in=180,out=0] (i10t0c.center);
+\coordinate (i00c) at (0.5, 1.0) {};
+\node (none) [hint] at (0.0, 1.0) {};
+\coordinate (i00s0c) at (0.0, 1.0) {};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i00t0c) at (1.0, 1.0) {};
+\coordinate (i10c) at (1.5, 1.0) {};
+\node (none) [hint] at (1.0, 1.0) {};
+\coordinate (i10s0c) at (1.0, 1.0) {};
+\node (none) [hint] at (2.0, 1.0) {};
+\coordinate (i10t0c) at (2.0, 1.0) {};
+\end{tikzpicture}
+\]
+\end{document}
