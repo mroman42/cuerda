@@ -94,13 +94,13 @@ instance Show Diagram2d where
 -------------
 -- EXAMPLE --
 -------------
-c = obj "\\mathbb{C}"
-o = morph "\\otimes" [c,c] [c]
-i = morph "I" [] [c]
-alpha = transf "\\hat\\alpha" [[idt c,o],[o]] [[o,idt c],[o]]
-alphainv = transf "\\hat\\alpha" [[o,idt c],[o]] [[idt c,o],[o]]
+-- c = obj "\\mathbb{C}"
+-- o = morph "\\otimes" [c,c] [c]
+-- i = morph "I" [] [c]
+-- alpha = transf "\\hat\\alpha" [[idt c,o],[o]] [[o,idt c],[o]]
+-- alphainv = transf "\\hat\\alpha" [[o,idt c],[o]] [[idt c,o],[o]]
 
-main :: IO ()
-main = do
-  writeTikz3 "test1.tex" [[[alphainv]],[[alpha]]]
-  writeTikz2 "test2.tex" [[idt c,idt c,i],[idt c,o],[o]]
+-- main :: IO ()
+-- main = do
+--   writeTikz3 "test1.tex" [[[alphainv]],[[alpha]]]
+--   writeTikz2 "test2.tex" [[idt c,idt c,i],[idt c,o],[o]]
