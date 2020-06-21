@@ -18,21 +18,33 @@ connection c = connectWith (style c) c
     connectWith Morphism = connectMorph
     connectWith Transformation = connectMorph
     connectWith Identity = connectIdentity
+    connectWith Anonymous = connectIdentity
     connectWith Space = connectSpace
 
+-- connectIdentity :: Cell2 -> String
+-- connectIdentity c =
+--   if (length (source2 c) > 0 && length (target2 c) > 0) then
+--     "\\draw ("
+--     ++ input
+--     ++ ".center) to [in=180,out=0] ("
+--     ++ output
+--     ++ ".center);"
+--    else
+--     ""
+--   where
+--     input = id1 $ head (source2 c)
+--     output = id1 $ head (target2 c)
+
 connectIdentity :: Cell2 -> String
-connectIdentity c =
-  if (length (source2 c) > 0 && length (target2 c) > 0) then
-    "\\draw ("
-    ++ input
-    ++ ".center) to [in=180,out=0] ("
-    ++ output
-    ++ ".center);"
-   else
-    ""
+connectIdentity c = unlines $
+  zipWith connectBoth (source2 c) (target2 c)
   where
     input = id1 $ head (source2 c)
     output = id1 $ head (target2 c)
+    connectBoth a b = concat
+      [ "\\draw ("++id1 a++".center) to [in=180,out=0] ("
+      ++id1 b++".center);"]
+    
 
 connectSpace :: Cell2 -> String
 connectSpace c = ""
@@ -83,8 +95,21 @@ connection3 c = connectWith (style3 c) c
   where
     connectWith Morphism = connect3Transformation
     connectWith Transformation = connect3Transformation
-    connectWith Identity = connect3Transformation
+    connectWith Identity = connect3Identity
+    connectWith Anonymous = connect3Transformation
     connectWith Space = connect3Empty
+
+connect3Identity :: Cell3 -> String
+connect3Identity c = unlines $
+    zipWith connectBoth
+      (filter realNodes (concat (source3 c)))
+      (filter realNodes (concat (target3 c)))
+  where
+    connectBoth a b = concat
+      [ "\\draw [red!30] ("++id2 a++".center) to [in=270,out=90] ("
+      ++id2 b++".center);"]
+    -- Only the nodes that are drawn
+    realNodes x = (style x == Morphism)
 
 connect3Transformation :: Cell3 -> String
 connect3Transformation c = unlines $

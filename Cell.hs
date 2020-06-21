@@ -83,8 +83,11 @@ transf = cell3
 identi :: [[Cell2]] -> Cell3
 identi s = Cell3 "" s s "none" 0.0 0.0 Identity
 
+transfAnon :: [[Cell2]] -> [[Cell2]] -> Cell3
+transfAnon s t = Cell3 "" s t "none" 0.0 0.0 Anonymous
+
 identi2 :: [[Cell2]] -> [[Cell2]] -> Cell3
-identi2 s t = Cell3 "" s t "none" 0.0 0.0 Identity
+identi2 s t = Cell3 "" s t "none" 0.0 0.0 Anonymous
 
 idn :: Cell2 -> Cell3
 idn a = Cell3 "i" [[a]] [[a]] "none" 0.0 0.0 Identity

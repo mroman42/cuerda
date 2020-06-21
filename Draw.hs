@@ -75,6 +75,7 @@ instance Draw Cell2 where
          drawWith Morphism = drawMorph
          drawWith Transformation = drawTransf
          drawWith Identity = drawIdentity
+         drawWith Anonymous = drawIdentity
          drawWith Space = drawSpace
 
     drawSpace :: Cell2 -> String
