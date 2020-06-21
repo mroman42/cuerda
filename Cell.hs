@@ -16,13 +16,17 @@ data Cell1 = Cell1
   , id1 :: Id
   , xpos1 :: Double
   , ypos1 :: Double
+  , style1 :: Style1
   }
 
 cell1 :: Label -> Cell1
-cell1 l = Cell1 l "none" 0.0 0.0
+cell1 l = Cell1 l "none" 0.0 0.0 Normal
 
 obj :: Label -> Cell1
-obj l = Cell1 l "none" 0.0 0.0
+obj l = Cell1 l "none" 0.0 0.0 Normal
+
+phantomWire :: Cell1
+phantomWire = Cell1 "ph" "none" 0.0 0.0 Invisible
 
 type Diagram1 = [Cell1]
 

@@ -61,18 +61,12 @@ connectMorph c = unlines $ concat
     lenT = length (target2 c)
 
     kS :: Int -> Cell1 -> String
-    kS n p = concat
+    kS n p = if (style1 p == Invisible) then "" else concat
      ["\\draw (",id1 p,".center) to [out=0, in=",show (angleS lenS n),"] (",id2 c,".center);"]
 
     kT :: Int -> Cell1 -> String
-    kT n p =
-      "\\draw ("
-      ++ id1 p
-      ++ ") to [out=180, in="
-      ++ show (angleT lenT n)
-      ++ "] ("
-      ++ id2 c
-      ++ ");"
+    kT n p = if (style1 p == Invisible) then "" else concat
+       ["\\draw (",id1 p,") to [out=180, in=",show (angleT lenT n),"] (",id2 c,");"]
 
     -- Rounded version, as by E. Di Lavore.
     angleS :: Int -> Int -> Double
