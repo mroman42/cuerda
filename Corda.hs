@@ -1,4 +1,4 @@
-module Corda
+module Cuerda
   ( module Cell
   , module Identify
   , module Connect
@@ -6,7 +6,7 @@ module Corda
   , module Draw
   , module Print
   , module Position
-  , module Corda )
+  , module Cuerda )
 where
 
 import Cell
@@ -34,9 +34,9 @@ writeTikz3 filename c = do
   writeFile filename $
     filterEmptyLines $ unlines
       [ "\\documentclass[crop,tikz]{standalone}"
-      , "\\usepackage{corda}"
+      , "\\usepackage{cuerda}"
       , "\\begin{document}"
-      , "\\begin{tikzpicture}[cordadiagram]"
+      , "\\begin{tikzpicture}[cuerdadiagram]"
       , drawDiagramIn3d 2 2.5 (identify "i" c)
       , "\\end{tikzpicture}"
       , "\\end{document}" ]
@@ -46,22 +46,22 @@ writeTikz2 filename c = do
   writeFile filename $
     filterEmptyLines $ unlines
       [ "\\documentclass[crop,tikz]{standalone}"
-      , "\\usepackage{corda}"
+      , "\\usepackage{cuerda}"
       , "\\begin{document}"
-      , "\\begin{tikzpicture}[cordadiagram]"
+      , "\\begin{tikzpicture}[cuerdadiagram]"
       , drawDiagram2 2 (identify "i" c)
       , "\\end{tikzpicture}"
       , "\\end{document}" ]
 
 latex3D :: [[[Cell3]]] -> IO ()
 latex3D c = putStr $ filterEmptyLines $ unlines
-  [ "\\begin{tikzpicture}[cordadiagram]"
+  [ "\\begin{tikzpicture}[cuerdadiagram]"
   , drawDiagramIn3d 2 2.5 (identify "i" c)
   , "\\end{tikzpicture}" ]
 
 latex2D :: [[Cell2]] -> IO ()
 latex2D c = putStr $ filterEmptyLines $ unlines
-  [ "\\begin{tikzpicture}[cordadiagram]"
+  [ "\\begin{tikzpicture}[cuerdadiagram]"
   , drawDiagram2 2 (identify "i" c)
   , "\\end{tikzpicture}" ]
 
@@ -74,7 +74,7 @@ mkDiagram3D s c = show (Diagram3d s (identify "i" c))
 instance Show Diagram3d where
   show c = unlines
     [ "\\newcommand{\\" ++ commandName3d c ++ "}{"
-    , "\\begin{tikzpicture}[cordadiagram]"
+    , "\\begin{tikzpicture}[cuerdadiagram]"
     , drawDiagramIn3d 2 2.5 (cells3d c)
     , "\\end{tikzpicture}}" ]
 
@@ -84,7 +84,7 @@ mkDiagram2D s c = show (Diagram2d s (identify "i" c))
 instance Show Diagram2d where
   show c = unlines
     [ "\\newcommand{\\" ++ commandName2d c ++ "}{"
-    , "\\begin{tikzpicture}[cordadiagram]"
+    , "\\begin{tikzpicture}[cuerdadiagram]"
     , drawDiagram2 2 (cells2d c)
     , "\\end{tikzpicture}}"
     ]

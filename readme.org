@@ -1,14 +1,14 @@
-#+TITLE: Corda
-#+latex_header: \usepackage{/home/mario/roam/code/chordahs/corda}
+#+TITLE: Cuerda
+#+latex_header: \usepackage{/home/mario/roam/code/chordahs/cuerda}
 
-*Corda* is a library for producing string and surface diagrams on Tikz. It is very loosely inspired on the theory of /associative n-categories/ for its internal representation (see [[https://arxiv.org/abs/1812.10586][Dorn (2018)]] and [[https://arxiv.org/abs/1902.03831][Reutter and Vicary (2019)]]) in that unitality is not strict.  For the end user, this means you will have to introduce some identity morphisms by hand, but the internal representation is greatly simplified because of this.
+*Cuerda* is a library for producing string and surface diagrams on Tikz. It is very loosely inspired on the theory of /associative n-categories/ for its internal representation (see [[https://arxiv.org/abs/1812.10586][Dorn (2018)]] and [[https://arxiv.org/abs/1902.03831][Reutter and Vicary (2019)]]) in that unitality is not strict.  For the end user, this means you will have to introduce some identity morphisms by hand, but the internal representation is greatly simplified because of this.
 
 * Usage example
-This is an example of how to use Corda in org-mode.
+This is an example of how to use Cuerda in org-mode.
 
 ** 2d diagrams
 #+BEGIN_SRC runhaskell :results drawer replace
-import Corda
+import Cuerda
 c = obj "\\mathbb{C}"
 o = morph "\\mu" [c,c] [c]
 i = morph "\\eta" [] [c]
@@ -22,11 +22,11 @@ main = do
   putStr "\\]"
 #+END_SRC
 
-[[file:https://github.com/mroman42/corda/raw/master/example1.png]]
+[[file:https://github.com/mroman42/cuerda/raw/master/example1.png]]
 
 ** 3d diagrams
 #+BEGIN_SRC runhaskell :results drawer replace
-import Corda
+import Cuerda
 c = obj "\\mathbb{C}"
 o = morph "\\otimes" [c,c] [c]
 i = morph "I" [] [c]
@@ -46,7 +46,7 @@ main = do
   putStr "\\]"
 #+END_SRC
 
-[[file:https://github.com/mroman42/corda/raw/master/example2.png]]
+[[file:https://github.com/mroman42/cuerda/raw/master/example2.png]]
 * Prior art and related
 
  - [[https://homotopy.io/][Homotopy.io]], /Heidemann, Hu, Vicary (2019)/.  A full implementation of associative n-categories on Javascript. It allows manipulation of diagrams and visualization in both 2d and 3d. It does not provide (as of June 2020) any way of exporting to Tikz. It is an inspiration for the approach here.
@@ -54,14 +54,14 @@ main = do
  - [[https://github.com/oxford-quantum-group/discopy][Discopy]], /Toumi, de Felice, Meichanetzidis, Rizzo (2020)/. A toolbox for computing with monoidal categories, focused on [[https://arxiv.org/abs/1003.4394][DisCoCat]] and quantum computing.
  - [[https://en.wikipedia.org/wiki/PGF/TikZ][Tikz]], /Tantau, Feuersänger (2005)/. Our target language.
 
-* Referencing Corda
-As of June 2020, the best way of referencing *Corda* is by pointing to its GitHub repository.
+* Referencing Cuerda
+As of June 2020, the best way of referencing *Cuerda* is by pointing to its GitHub repository.
 
 #+BEGIN_SRC bibtex
-@misc{corda20,
+@misc{cuerda20,
   author = {Mario Román},
-  title = {Corda library, Version 0.1},
-  howpublished = {GitHub \url{https://github.com/mroman42/corda}},
+  title = {Cuerda library, Version 0.1},
+  howpublished = {GitHub \url{https://github.com/mroman42/cuerda}},
   year = {2020}
 }
 #+END_SRC

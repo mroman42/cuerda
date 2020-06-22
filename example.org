@@ -1,11 +1,11 @@
 #+TITLE: Example
-#+latex_header: \usepackage{/home/mario/roam/code/corda/corda}
+#+latex_header: \usepackage{/home/mario/roam/code/cuerda/cuerda}
 
-This is an example of how to use Corda in org-mode.
+This is an example of how to use Cuerda in org-mode.
 
 * 2d diagrams
 #+BEGIN_SRC runhaskell :results drawer :exports results
-import Corda
+import Cuerda
 c = obj "\\mathbb{C}"
 m = morph "\\mu" [c,c] [c]
 n = morph "\\eta" [] [c]
@@ -19,7 +19,7 @@ main = do
 
 #+RESULTS:
 :results:
-\[\begin{tikzpicture}[cordadiagram]
+\[\begin{tikzpicture}[cuerdadiagram]
 \node (i00c) [morphism] at (0.5, 0.5) {$\eta$};
 
 \node (none) [hint] at (1.0, 0.5) {};
@@ -81,7 +81,7 @@ main = do
 
 
 \end{tikzpicture}
-\quad = \quad\begin{tikzpicture}[cordadiagram]
+\quad = \quad\begin{tikzpicture}[cuerdadiagram]
 \coordinate (i00c) at (0.5, 1.0) {};
 \node (none) [hint] at (0.0, 1.0) {};
 \coordinate (i00s0c) at (0.0, 1.0) {};
@@ -127,7 +127,7 @@ main = do
 
 * 3d diagrams
 #+BEGIN_SRC runhaskell :results drawer replace
-import Corda
+import Cuerda
 c = obj "\\mathbb{C}"
 o = morph "\\otimes" [c,c] [c]
 i = morph "I" [] [c]
@@ -145,7 +145,7 @@ main = do
 
 #+RESULTS:
 :results:
-\[\begin{tikzpicture}[cordadiagram]
+\[\begin{tikzpicture}[cuerdadiagram]
 \begin{scope}[yshift=0.0cm]
 \begin{scope}[tilted,yshift=0.0cm]
 \node (i000s00c) [morphism] at (-0.5, 0.5) {$\otimes$};
@@ -743,7 +743,7 @@ main = do
 \end{scope}
 \end{scope}
 \end{tikzpicture}
-\quad = \quad\begin{tikzpicture}[cordadiagram]
+\quad = \quad\begin{tikzpicture}[cuerdadiagram]
 \begin{scope}[yshift=0.0cm]
 \begin{scope}[tilted,yshift=0.0cm]
 \node (i000s00c) [morphism] at (-0.5, 0.5) {$\otimes$};

@@ -6,7 +6,7 @@ let
 
   f = { mkDerivation, base, mtl, stdenv, delay }:
       mkDerivation {
-        pname = "corda";
+        pname = "cuerda";
         version = "0.1.0.0";
         src = ./.;
         libraryHaskellDepends = [ base mtl ];
