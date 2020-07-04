@@ -4,6 +4,7 @@
 module Cell where
 
 import Style
+import Settings
 
 -- Declares the type of an ID and of a Label. Ids represent the Tikz ids for the
 -- nodes; the labels, on the other hand, are the names given to the nodes.
@@ -38,22 +39,26 @@ data Cell2 = Cell2
   , xpos2 :: Double
   , ypos2 :: Double
   , style :: Style
+  , nodeSettings2 :: String
   }
 
 cell2 :: Label -> [Cell1] -> [Cell1] -> Cell2
-cell2 l s t = Cell2 l s t "none" 0.0 0.0 Morphism
+cell2 l s t = Cell2 l s t "none" 0.0 0.0 Morphism defaultMorphismStyle
 
 morph :: Label -> [Cell1] -> [Cell1] -> Cell2
-morph l s t = Cell2 l s t "none" 0.0 0.0 Morphism
+morph l s t = Cell2 l s t "none" 0.0 0.0 Morphism defaultMorphismStyle
+
+morphWithSettings :: String -> Label -> [Cell1] -> [Cell1] -> Cell2
+morphWithSettings settings l s t = Cell2 l s t "none" 0.0 0.0 Morphism settings
 
 idt :: Cell1 -> Cell2
-idt a = Cell2 "[idt]" [a] [a] "none" 0.0 0.0 Identity
+idt a = Cell2 "[idt]" [a] [a] "none" 0.0 0.0 Identity defaultMorphismStyle
 
 space :: Cell2
-space = Cell2 "[space]" [] [] "none" 0.0 0.0 Space
+space = Cell2 "[space]" [] [] "none" 0.0 0.0 Space defaultMorphismStyle
 
 emptySpace :: Cell1 -> Cell2
-emptySpace a = Cell2 "[empty]" [a] [a] "none" 0.0 0.0 Space
+emptySpace a = Cell2 "[empty]" [a] [a] "none" 0.0 0.0 Space defaultMorphismStyle
 
 type Diagram2 = [[Cell2]]
 

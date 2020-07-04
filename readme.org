@@ -50,7 +50,7 @@ main = do
 * Prior art and related
 
  - [[https://homotopy.io/][Homotopy.io]], /Heidemann, Hu, Vicary (2019)/.  A full implementation of associative n-categories on Javascript. It allows manipulation of diagrams and visualization in both 2d and 3d. It does not provide (as of June 2020) any way of exporting to Tikz. It is an inspiration for the approach here.
- - [[https://arxiv.org/abs/1003.4394][Discokitty]], /Román (2019)./ An educational implementation of [[https://arxiv.org/abs/1003.4394][DisCoCat]] that also happened to generate string diagrams on Tikz.
+ - [[https://hackage.haskell.org/package/discokitty][Discokitty]], /Román (2019)./ An educational implementation of [[https://arxiv.org/abs/1003.4394][DisCoCat]] that also happened to generate string diagrams on Tikz.
  - [[https://github.com/oxford-quantum-group/discopy][Discopy]], /Toumi, de Felice, Meichanetzidis, Rizzo (2020)/. A toolbox for computing with monoidal categories, focused on [[https://arxiv.org/abs/1003.4394][DisCoCat]] and quantum computing.
  - [[https://en.wikipedia.org/wiki/PGF/TikZ][Tikz]], /Tantau, Feuersänger (2005)/. Our target language.
 

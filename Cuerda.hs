@@ -6,7 +6,8 @@ module Cuerda
   , module Draw
   , module Print
   , module Position
-  , module Cuerda )
+  , module Cuerda
+  , module Settings )
 where
 
 import Cell
@@ -16,7 +17,7 @@ import Style
 import Draw
 import Position
 import Print
-
+import Settings
 
 
 data Diagram3d = Diagram3d
@@ -30,14 +31,17 @@ data Diagram2d = Diagram2d
   }
 
 writeTikz3 :: String -> [[[Cell3]]] -> IO ()
-writeTikz3 filename c = do
+writeTikz3 = writeTikz3withSettings defaultSettings
+
+writeTikz3withSettings :: Settings -> String -> [[[Cell3]]] -> IO ()
+writeTikz3withSettings settings filename c = do
   writeFile filename $
     filterEmptyLines $ unlines
       [ "\\documentclass[crop,tikz]{standalone}"
       , "\\usepackage{cuerda}"
       , "\\begin{document}"
       , "\\begin{tikzpicture}[cuerdadiagram]"
-      , drawDiagramIn3d 2 2.5 (identify "i" c)
+      , drawDiagramIn3d settings 2 2.5 (identify "i" c)
       , "\\end{tikzpicture}"
       , "\\end{document}" ]
 
@@ -49,20 +53,20 @@ writeTikz2 filename c = do
       , "\\usepackage{cuerda}"
       , "\\begin{document}"
       , "\\begin{tikzpicture}[cuerdadiagram]"
-      , drawDiagram2 2 (identify "i" c)
+      , drawDiagram2 defaultSettings 2 (identify "i" c)
       , "\\end{tikzpicture}"
       , "\\end{document}" ]
 
 latex3D :: [[[Cell3]]] -> IO ()
 latex3D c = putStr $ filterEmptyLines $ unlines
   [ "\\begin{tikzpicture}[cuerdadiagram]"
-  , drawDiagramIn3d 2 2.5 (identify "i" c)
+  , drawDiagramIn3d defaultSettings 2 2.5 (identify "i" c)
   , "\\end{tikzpicture}" ]
 
 latex2D :: [[Cell2]] -> IO ()
 latex2D c = putStr $ filterEmptyLines $ unlines
   [ "\\begin{tikzpicture}[cuerdadiagram]"
-  , drawDiagram2 2 (identify "i" c)
+  , drawDiagram2 defaultSettings 2 (identify "i" c)
   , "\\end{tikzpicture}" ]
 
 filterEmptyLines :: String -> String
@@ -75,7 +79,7 @@ instance Show Diagram3d where
   show c = unlines
     [ "\\newcommand{\\" ++ commandName3d c ++ "}{"
     , "\\begin{tikzpicture}[cuerdadiagram]"
-    , drawDiagramIn3d 2 2.5 (cells3d c)
+    , drawDiagramIn3d defaultSettings 2 2.5 (cells3d c)
     , "\\end{tikzpicture}}" ]
 
 mkDiagram2D :: String -> [[Cell2]] -> String
@@ -85,22 +89,13 @@ instance Show Diagram2d where
   show c = unlines
     [ "\\newcommand{\\" ++ commandName2d c ++ "}{"
     , "\\begin{tikzpicture}[cuerdadiagram]"
-    , drawDiagram2 2 (cells2d c)
+    , drawDiagram2 defaultSettings 2 (cells2d c)
     , "\\end{tikzpicture}}"
     ]
 
 
+whiteSpider :: [Cell1] -> [Cell1] -> Cell2
+whiteSpider = morphWithSettings "circle, minimum height = .25cm, minimum width = .25cm, fill=white, inner sep=0.5pt, draw" ""
 
--------------
--- EXAMPLE --
--------------
--- c = obj "\\mathbb{C}"
--- o = morph "\\otimes" [c,c] [c]
--- i = morph "I" [] [c]
--- alpha = transf "\\hat\\alpha" [[idt c,o],[o]] [[o,idt c],[o]]
--- alphainv = transf "\\hat\\alpha" [[o,idt c],[o]] [[idt c,o],[o]]
-
--- main :: IO ()
--- main = do
---   writeTikz3 "test1.tex" [[[alphainv]],[[alpha]]]
---   writeTikz2 "test2.tex" [[idt c,idt c,i],[idt c,o],[o]]
+blackSpider :: [Cell1] -> [Cell1] -> Cell2
+blackSpider = morphWithSettings "circle, minimum height = .25cm, minimum width = .25cm, fill=black, inner sep=0.5pt, draw" ""
